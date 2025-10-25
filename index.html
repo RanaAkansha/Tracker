@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Login to PRANA - A web-based system for recording and tracking daily activities."
+    />
+    <meta
+      name="keywords"
+      content="PRANA, login, activity tracker, daily routine, student system"
+    />
+    <meta name="author" content="Akansha Rana" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:title" content="PRANA | Login" />
+    <meta
+      property="og:description"
+      content="Access your daily activity log through PRANA."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./images/banner.png" />
+
+    <title>PRANA | Login</title>
+
+    <link rel="icon" type="image/x-icon" href="image.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        position: relative;
+        width: 1000px;
+        max-width: 100%;
+        height: 600px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        border-radius: 20px;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .form-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        transition: all 0.8s ease-in-out;
+        background: rgba(255, 255, 255, 0.95);
+      }
+
+      #admin-wrapper {
+        flex-direction: row-reverse;
+      }
+
+      .form-wrapper.hidden {
+        opacity: 0;
+        transform: translateX(-100%);
+        pointer-events: none;
+      }
+
+      .left-panel {
+        flex: 0 0 40%;
+        background: linear-gradient(135deg, #2a2c2a 0%, #000000 100%);
+        color: white;
+        padding: 50px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .left-panel::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+        background-size: cover;
+      }
+
+      .left-panel h1 {
+        font-size: 3.5rem;
+        line-height: 1.2;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .left-panel h2 {
+        font-size: 2.2rem;
+        line-height: 1;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .left-panel p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.8);
+        margin-top: 20px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .right-panel {
+        flex: 0 0 60%;
+        background-color: white;
+        padding: 50px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+
+      .logo-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, #2a2c2a 0%, #000000 100%);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+      }
+
+      .logo-icon i {
+        color: white;
+        font-size: 1.5rem;
+      }
+
+      .logo-text {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #333;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+        color: #333;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .icon-input {
+        position: relative;
+      }
+
+      .icon-input i {
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+        color: #6b7280;
+        font-size: 1.2rem;
+        transition: all 0.3s;
+      }
+
+      .icon-input input {
+        width: 100%;
+        padding: 15px 15px 15px 50px;
+        border: 2px solid #e5e7eb;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s;
+        background: #f9fafb;
+      }
+
+      .icon-input input:focus {
+        border-color: #000000;
+        outline: none;
+        background: white;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .icon-input input:focus + i {
+        color: #000000;
+      }
+
+      .btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #2a2c2a 0%, #000000 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        margin-top: 10px;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+      }
+
+      .switch-form {
+        text-align: center;
+        margin-top: 25px;
+        font-size: 0.95rem;
+        color: #6b7280;
+      }
+
+      .switch-form a {
+        color: #2a2c2a;
+        text-decoration: none;
+        font-weight: 600;
+        margin-left: 5px;
+        transition: all 0.2s;
+      }
+
+      .switch-form a:hover {
+        text-decoration: underline;
+      }
+
+      .back-btn {
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 20px;
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        cursor: pointer;
+        position: absolute;
+        top: 30px;
+        left: 40px;
+        z-index: 2;
+        transition: all 0.2s;
+      }
+
+      .back-btn:hover {
+        transform: translateX(-5px);
+      }
+
+      .back-btn::before {
+        content: "←";
+        margin-right: 8px;
+        font-size: 1.2rem;
+      }
+
+      .feature-list {
+        margin-top: 30px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .feature-item i {
+        margin-right: 10px;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .fade-in {
+        animation: fadeIn 0.6s ease forwards;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          height: auto;
+          border-radius: 15px;
+        }
+
+        .form-wrapper {
+          flex-direction: column;
+          position: relative;
+        }
+
+        #admin-wrapper {
+          flex-direction: column;
+        }
+
+        .left-panel,
+        .right-panel {
+          flex: 1;
+          padding: 40px 30px;
+        }
+
+        .left-panel {
+          text-align: center;
+        }
+
+        .left-panel h1 {
+          font-size: 2.5rem;
+        }
+
+        .left-panel h2 {
+          font-size: 1.8rem;
+        }
+
+        .back-btn {
+          position: relative;
+          top: 0;
+          left: 0;
+          margin-bottom: 20px;
+          display: inline-block;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .left-panel,
+        .right-panel {
+          padding: 30px 20px;
+        }
+
+        .logo-text {
+          font-size: 1.5rem;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="form-wrapper fade-in" id="login-wrapper">
+        <div class="left-panel" id="login-left">
+          <h2>Welcome to</h2>
+          <h1>PRANA!</h1>
+          <p>Productivity & Routine Activity Noting Application</p>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Track daily activities</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Monitor your progress</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-check-circle"></i>
+              <span>Build better habits</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-panel" id="login-form">
+          <div class="logo">
+            <div class="logo-icon">
+              <i class="fas fa-spa"></i>
+            </div>
+            <div class="logo-text">PRANA</div>
+          </div>
+          <h2>Student Login</h2>
+          <form>
+            <div class="form-group icon-input">
+              <i class="fa-solid fa-user"></i>
+              <input type="text" id="scholar-id" placeholder="Scholar ID" />
+            </div>
+
+            <div class="form-group icon-input">
+              <i class="fa-solid fa-lock"></i>
+              <input
+                type="password"
+                id="login-password"
+                placeholder="Password"
+              />
+            </div>
+
+            <a href="student.html"
+              ><button type="button" class="btn">Login</button></a
+            >
+          </form>
+
+          <div class="switch-form">
+            Login as Admin?
+            <a href="#" id="show-admin">Switch to Admin Login</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-wrapper hidden" id="admin-wrapper">
+        <div class="left-panel" id="admin-left">
+          <a class="back-btn" id="back-to-student">Back to Student Login</a>
+          <h2>Administrator Access</h2>
+          <h1>PRANA</h1>
+          <p>Manage student activities and monitor participation</p>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <i class="fas fa-chart-bar"></i>
+              <span>View participation reports</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-users"></i>
+              <span>Manage student accounts</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-download"></i>
+              <span>Export data for analysis</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-panel" id="admin-form">
+          <div class="logo">
+            <div class="logo-icon">
+              <i class="fas fa-user-shield"></i>
+            </div>
+            <div class="logo-text">PRANA Admin</div>
+          </div>
+          <h2>Admin Login</h2>
+          <form>
+            <div class="form-group icon-input">
+              <i class="fa-solid fa-envelope"></i>
+              <input type="text" id="email-id" placeholder="Email ID" />
+            </div>
+
+            <div class="form-group icon-input">
+              <i class="fa-solid fa-lock"></i>
+              <input
+                type="password"
+                id="admin-password"
+                placeholder="Password"
+              />
+            </div>
+
+            <a href="admin.html"
+              ><button type="button" class="btn">Login</button></a
+            >
+          </form>
+
+          <div class="switch-form">
+            Login as Student?
+            <a href="#" id="show-student">Switch to Student Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const loginWrapper = document.getElementById("login-wrapper");
+        const adminWrapper = document.getElementById("admin-wrapper");
+        const showAdminBtn = document.getElementById("show-admin");
+        const showStudentBtn = document.getElementById("show-student");
+        const backToStudentBtn = document.getElementById("back-to-student");
+
+        function showWrapper(wrapper) {
+          wrapper.classList.remove("hidden");
+          wrapper.classList.add("fade-in");
+        }
+
+        function hideWrapper(wrapper) {
+          wrapper.classList.add("hidden");
+          wrapper.classList.remove("fade-in");
+        }
+
+        showAdminBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          hideWrapper(loginWrapper);
+          showWrapper(adminWrapper);
+        });
+
+        showStudentBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          hideWrapper(adminWrapper);
+          showWrapper(loginWrapper);
+        });
+
+        backToStudentBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          hideWrapper(adminWrapper);
+          showWrapper(loginWrapper);
+        });
+
+        // Student login handler
+        document
+          .querySelector("#login-form form")
+          .addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const scholarId = document.getElementById("scholar-id").value;
+            const password = document.getElementById("login-password").value;
+
+            console.log("Student login attempt:", { scholarId, password });
+
+            try {
+              const response = await fetch("/api/student/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  scholar_id: scholarId,
+                  password: password,
+                }),
+              });
+
+              const data = await response.json();
+              console.log("Student login response:", data);
+
+              if (data.success) {
+                // Store user data in localStorage
+                localStorage.setItem("student", JSON.stringify(data.student));
+                localStorage.setItem("token", data.token || "student-token");
+                console.log("Student data stored:", data.student);
+
+                // Small delay to ensure localStorage is saved
+                setTimeout(() => {
+                  window.location.href = "student.html";
+                }, 100);
+              } else {
+                alert("Login failed: " + (data.error || "Invalid credentials"));
+              }
+            } catch (error) {
+              console.error("Login error:", error);
+              alert("Login error: " + error.message);
+            }
+          });
+
+        // Admin login handler
+        document
+          .querySelector("#admin-form form")
+          .addEventListener("submit", async function (e) {
+            e.preventDefault();
+            const email = document.getElementById("email-id").value;
+            const password = document.getElementById("admin-password").value;
+
+            console.log("Admin login attempt:", { email, password });
+
+            try {
+              const response = await fetch("/api/admin/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: email, password: password }),
+              });
+
+              const data = await response.json();
+              console.log("Admin login response:", data);
+
+              if (data.success) {
+                // Store admin data in localStorage
+                localStorage.setItem("admin", JSON.stringify(data.admin));
+                localStorage.setItem("token", data.token || "admin-token");
+                console.log("Admin data stored:", data.admin);
+
+                // Small delay to ensure localStorage is saved
+                setTimeout(() => {
+                  window.location.href = "admin.html";
+                }, 100);
+              } else {
+                alert("Login failed: " + (data.error || "Invalid credentials"));
+              }
+            } catch (error) {
+              console.error("Login error:", error);
+              alert("Login error: " + error.message);
+            }
+          });
+
+        // Remove the old button click handlers and replace buttons
+        document.querySelectorAll('a[href="student.html"]').forEach((link) => {
+          link.outerHTML = '<button type="submit" class="btn">Login</button>';
+        });
+
+        document.querySelectorAll('a[href="admin.html"]').forEach((link) => {
+          link.outerHTML = '<button type="submit" class="btn">Login</button>';
+        });
+
+        document.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            const activeForm = document.querySelector(
+              ".form-wrapper:not(.hidden) form"
+            );
+            if (activeForm) {
+              const submitEvent = new Event("submit", { cancelable: true });
+              activeForm.dispatchEvent(submitEvent);
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

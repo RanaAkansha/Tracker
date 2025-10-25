@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="PRANA Warden Dashboard - Monitor and analyze students' daily activity reports."
+    />
+    <meta
+      name="keywords"
+      content="PRANA, warden portal, hostel management, student reports"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:title" content="PRANA | Warden Dashboard" />
+    <meta
+      property="og:description"
+      content="Monitor hostel activity data, track student participation, and generate reports."
+    />
+
+    <title>PRANA | Warden Dashboard</title>
+
+    <link rel="icon" type="image/x-icon" href="image.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+      :root {
+        --color-black-600: #2a2c2a;
+        --color-black-500: #000000;
+        --color-black-400: #4b5563;
+        --color-black-200: #e5e7eb;
+        --color-black-100: #f3f4f6;
+        --color-green-600: #059669;
+        --color-green-500: #10b981;
+        --color-green-200: #bbf7d0;
+        --color-green-100: #dcfce7;
+        --color-green-50: #f0fdf4;
+        --color-gray-800: #1f2937;
+        --color-gray-700: #374151;
+        --color-gray-600: #4b5563;
+        --color-gray-500: #6b7280;
+        --color-gray-200: #e5e7eb;
+        --color-gray-100: #f3f4f6;
+        --color-white: #ffffff;
+        --color-blue-100: #dbeafe;
+        --color-blue-600: #2563eb;
+        --color-yellow-100: #fef3c7;
+        --color-yellow-600: #d97706;
+        --color-red-100: #fee2e2;
+        --color-red-600: #dc2626;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #232323 0%, #181616 100%);
+        min-height: 100vh;
+        padding: 2rem 0;
+      }
+
+      .container {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .logo-icon {
+        width: 3rem;
+        height: 3rem;
+        background: var(--color-white);
+        border-radius: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      .logo-icon i {
+        font-size: 1.5rem;
+        color: var(--color-black-600);
+      }
+
+      .logo-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-white);
+      }
+
+      .logo-subtitle {
+        color: var(--color-white);
+        font-size: 0.875rem;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .user-details {
+        text-align: right;
+      }
+
+      .user-name {
+        color: var(--color-white);
+        font-weight: 500;
+      }
+
+      .user-id {
+        color: var(--color-white);
+        font-size: 0.875rem;
+      }
+
+      .avatar-container {
+        position: relative;
+      }
+
+      .avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--color-white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        cursor: pointer;
+      }
+
+      .avatar i {
+        color: var(--color-black-600);
+      }
+
+      .online-indicator {
+        position: absolute;
+        top: -0.25rem;
+        right: -0.25rem;
+        width: 1rem;
+        height: 1rem;
+        background: #10b981;
+        border-radius: 50%;
+        border: 2px solid var(--color-white);
+      }
+
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 1rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .stat-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 1rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      }
+
+      .stat-icon {
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+
+      .stat-icon.total {
+        background-color: var(--color-blue-100);
+      }
+
+      .stat-icon.total i {
+        color: var(--color-blue-600);
+        font-size: 1.5rem;
+      }
+
+      .stat-icon.active {
+        background-color: var(--color-green-100);
+      }
+
+      .stat-icon.active i {
+        color: var(--color-green-600);
+        font-size: 1.5rem;
+      }
+
+      .stat-icon.inactive {
+        background-color: var(--color-gray-100);
+      }
+
+      .stat-icon.inactive i {
+        color: var(--color-gray-500);
+        font-size: 1.5rem;
+      }
+
+      .stat-icon.completed {
+        background-color: var(--color-yellow-100);
+      }
+
+      .stat-icon.completed i {
+        color: var(--color-yellow-600);
+        font-size: 1.5rem;
+      }
+
+      .stat-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--color-gray-800);
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-label {
+        color: var(--color-gray-600);
+        font-size: 0.875rem;
+      }
+
+      .section-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--color-gray-800);
+        margin-bottom: 1.5rem;
+      }
+
+      .table-container {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--color-gray-200);
+      }
+
+      th {
+        background-color: var(--color-gray-100);
+        color: var(--color-gray-700);
+        font-weight: 600;
+      }
+
+      tr:hover {
+        background-color: var(--color-gray-50);
+      }
+
+      .status-badge {
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+
+      .status-badge.active {
+        background-color: var(--color-green-100);
+        color: var(--color-green-700);
+      }
+
+      .status-badge.inactive {
+        background-color: var(--color-gray-100);
+        color: var(--color-gray-700);
+      }
+
+      .status-badge.pending {
+        background-color: var(--color-yellow-100);
+        color: var(--color-yellow-700);
+      }
+
+      .action-btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-size: 0.875rem;
+      }
+
+      .action-btn.view {
+        background-color: var(--color-blue-100);
+        color: var(--color-blue-700);
+      }
+
+      .action-btn.edit {
+        background-color: var(--color-yellow-100);
+        color: var(--color-yellow-700);
+      }
+
+      .action-btn.delete {
+        background-color: var(--color-red-100);
+        color: var(--color-red-700);
+      }
+
+      .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .charts-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .chart-card {
+        padding: 1.5rem;
+      }
+
+      .chart-placeholder {
+        height: 250px;
+        background-color: var(--color-gray-100);
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-gray-500);
+        font-size: 0.875rem;
+      }
+
+      .footer {
+        margin-top: 2rem;
+        text-align: center;
+      }
+
+      .footer-text {
+        color: var(--color-white);
+        font-size: 0.875rem;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .dashboard-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .charts-container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .dashboard-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+        }
+
+        .user-info {
+          align-self: flex-end;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <i class="fas fa-user-shield"></i>
+          </div>
+          <div>
+            <h1 class="logo-title">PRANA</h1>
+            <p class="logo-subtitle">Admin Dashboard</p>
+          </div>
+        </div>
+        <div class="user-info">
+          <div class="user-details">
+            <p class="user-name" id="adminName">Admin User</p>
+            <p class="user-id" id="adminId">ID: ADM-001</p>
+          </div>
+          <div class="avatar-container">
+            <div class="avatar">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="online-indicator"></div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Statistics Cards -->
+      <div class="dashboard-grid">
+        <div class="stat-card">
+          <div class="stat-icon total">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stat-value">1,248</div>
+          <div class="stat-label">Total Students</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon active">
+            <i class="fas fa-user-check"></i>
+          </div>
+          <div class="stat-value">892</div>
+          <div class="stat-label">Active Today</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon inactive">
+            <i class="fas fa-user-clock"></i>
+          </div>
+          <div class="stat-value">356</div>
+          <div class="stat-label">Inactive</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon completed">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="stat-value">78%</div>
+          <div class="stat-label">Completion Rate</div>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="card">
+        <h3 class="section-title">Recent Student Activity</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Student Name</th>
+                <th>Scholar ID</th>
+                <th>Activity</th>
+                <th>Time</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Akansha Rana</td>
+                <td>23144003</td>
+                <td>Morning Prayer</td>
+                <td>05:15 AM</td>
+                <td><span class="status-badge active">Completed</span></td>
+                <td>
+                  <button class="action-btn view">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Rahul Sharma</td>
+                <td>23144015</td>
+                <td>Yoga</td>
+                <td>06:30 AM</td>
+                <td><span class="status-badge active">Completed</span></td>
+                <td>
+                  <button class="action-btn view">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Priya Patel</td>
+                <td>23144028</td>
+                <td>Shramdaan</td>
+                <td>04:45 PM</td>
+                <td><span class="status-badge pending">Pending</span></td>
+                <td>
+                  <button class="action-btn view">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Vikram Singh</td>
+                <td>23144042</td>
+                <td>Meditation</td>
+                <td>06:10 PM</td>
+                <td><span class="status-badge active">Completed</span></td>
+                <td>
+                  <button class="action-btn view">View</button>
+                </td>
+              </tr>
+              <tr>
+                <td>Anjali Gupta</td>
+                <td>23144056</td>
+                <td>Evening Prayer</td>
+                <td>08:20 PM</td>
+                <td><span class="status-badge inactive">Missed</span></td>
+                <td>
+                  <button class="action-btn view">View</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Charts Section -->
+      <!-- <div class="charts-container">
+        <div class="card chart-card">
+          <h3 class="section-title">Activity Completion Rate</h3>
+          <div class="chart-placeholder">
+            <i class="fas fa-chart-pie"></i> Activity Completion Chart
+          </div>
+        </div>
+
+        <div class="card chart-card">
+          <h3 class="section-title">Weekly Participation</h3>
+          <div class="chart-placeholder">
+            <i class="fas fa-chart-bar"></i> Weekly Participation Chart
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p class="footer-text">
+          PRANA - Productivity & Routine Activity Noting Application
+        </p>
+        <p class="footer-text">Admin Dashboard v1.0</p>
+      </footer>
+    </div>
+
+    <script>
+      // Authentication check for admin
+      document.addEventListener("DOMContentLoaded", function () {
+        // Check if admin is logged in
+        const admin = JSON.parse(localStorage.getItem("admin"));
+        const token = localStorage.getItem("token");
+
+        console.log("Admin data:", admin);
+        console.log("Token:", token);
+
+        if (!admin || !token) {
+          alert("Please login as admin first");
+          window.location.href = "index.html";
+          return;
+        }
+
+        // If logged in, continue loading the dashboard
+        console.log("Admin logged in:", admin);
+        initAdminDashboard();
+      });
+
+      const API_URL = "http://localhost:3000";
+      let currentAdmin = null;
+      let refreshInterval;
+
+      async function initAdminDashboard() {
+        currentAdmin = JSON.parse(localStorage.getItem("admin"));
+
+        // Update admin info
+        document.getElementById("adminName").textContent =
+          currentAdmin.name || "Admin User";
+        document.getElementById("adminId").textContent = `ID: ADM-${
+          currentAdmin.id || "001"
+        }`;
+
+        // Set current date
+        setCurrentDate();
+
+        // Load initial data
+        await loadDashboardStats();
+        await loadRecentActivities();
+
+        // Start auto-refresh
+        startAutoRefresh();
+
+        // Add refresh button functionality
+        addRefreshButton();
+      }
+
+      async function loadDashboardStats() {
+        try {
+          console.log("Loading dashboard stats...");
+          const response = await fetch(`${API_URL}/api/admin/stats`);
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log("Stats response:", data);
+
+          // Update stat cards with real data
+          updateStatsCards(data);
+        } catch (error) {
+          console.error("Error loading stats:", error);
+          // Use demo stats if API fails
+          useDemoStats();
+        }
+      }
+
+      function updateStatsCards(data) {
+        const statCards = document.querySelectorAll(".stat-value");
+
+        // Update with real data from API
+        if (statCards[0]) statCards[0].textContent = data.totalStudents || "0";
+        if (statCards[1]) statCards[1].textContent = data.activeToday || "0";
+        if (statCards[2]) statCards[2].textContent = data.inactive || "0";
+
+        // Calculate completion rate if not provided
+        const completionRate =
+          data.completionRate ||
+          (data.totalStudents > 0
+            ? Math.round((data.activeToday / data.totalStudents) * 100)
+            : 0);
+
+        if (statCards[3]) statCards[3].textContent = completionRate + "%";
+
+        // Update last updated time
+        updateLastUpdatedTime();
+      }
+
+      async function loadRecentActivities() {
+        try {
+          console.log("Loading recent activities...");
+          const response = await fetch(`${API_URL}/api/admin/activities`);
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log("Recent activities response:", data);
+
+          if (data.activities && data.activities.length > 0) {
+            updateActivitiesTable(data.activities);
+          } else if (data.success && data.recentActivities) {
+            updateActivitiesTable(data.recentActivities);
+          } else {
+            // Use demo data if no activities from API
+            useDemoActivities();
+          }
+        } catch (error) {
+          console.error("Error loading activities:", error);
+          // Use demo data if API fails
+          useDemoActivities();
+        }
+      }
+
+      function updateActivitiesTable(activities) {
+        const tbody = document.querySelector("table tbody");
+        tbody.innerHTML = "";
+
+        // Sort activities by time (newest first)
+        activities.sort(
+          (a, b) =>
+            new Date(b.completionTime || b.created_at) -
+            new Date(a.completionTime || a.created_at)
+        );
+
+        // Show only latest 10 activities
+        const recentActivities = activities.slice(0, 10);
+
+        recentActivities.forEach((activity) => {
+          const row = document.createElement("tr");
+
+          // Determine status
+          let statusClass, statusText;
+          if (activity.status === "completed" || activity.completed) {
+            statusClass = "active";
+            statusText = "Completed";
+          } else if (activity.status === "missed" || activity.missed) {
+            statusClass = "inactive";
+            statusText = "Missed";
+          } else {
+            statusClass = "pending";
+            statusText = "Pending";
+          }
+
+          // Format time
+          const activityTime = activity.completionTime
+            ? new Date(activity.completionTime).toLocaleTimeString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })
+            : activity.activity_time || "All Day";
+
+          row.innerHTML = `
+        <td>${activity.student_name || activity.name || "Student"}</td>
+        <td>${activity.scholar_id || "N/A"}</td>
+        <td>${activity.activity_name || activity.name || "Activity"}</td>
+        <td>${activityTime}</td>
+        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+        <td><button class="action-btn view" onclick="viewStudentDetails('${
+          activity.scholar_id
+        }')">View</button></td>
+      `;
+          tbody.appendChild(row);
+        });
+
+        // Update last updated time
+        updateLastUpdatedTime();
+      }
+
+      function useDemoStats() {
+        // Use demo data with more realistic numbers
+        const demoStats = {
+          totalStudents: Math.floor(Math.random() * 100) + 1200, // 1200-1300
+          activeToday: Math.floor(Math.random() * 200) + 800, // 800-1000
+          inactive: Math.floor(Math.random() * 100) + 300, // 300-400
+          completionRate: Math.floor(Math.random() * 20) + 70, // 70-90%
+        };
+
+        updateStatsCards(demoStats);
+      }
+
+      function useDemoActivities() {
+        // Generate demo activities with current time
+        const demoActivities = [
+          {
+            student_name: "Akansha Rana",
+            scholar_id: "23144003",
+            activity_name: "Morning Prayer",
+            completionTime: new Date(),
+            status: "completed",
+          },
+          {
+            student_name: "Rahul Sharma",
+            scholar_id: "23144015",
+            activity_name: "Yoga",
+            completionTime: new Date(Date.now() - 30 * 60 * 1000), // 30 mins ago
+            status: "completed",
+          },
+          {
+            student_name: "Priya Patel",
+            scholar_id: "23144028",
+            activity_name: "Shramdaan",
+            completionTime: null,
+            status: "pending",
+          },
+          {
+            student_name: "Vikram Singh",
+            scholar_id: "23144042",
+            activity_name: "Meditation",
+            completionTime: new Date(Date.now() - 15 * 60 * 1000), // 15 mins ago
+            status: "completed",
+          },
+          {
+            student_name: "Anjali Gupta",
+            scholar_id: "23144056",
+            activity_name: "Evening Prayer",
+            completionTime: null,
+            status: "missed",
+          },
+        ];
+
+        updateActivitiesTable(demoActivities);
+      }
+
+      function setCurrentDate() {
+        const now = new Date();
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        const currentDateEl = document.getElementById("currentDate");
+        if (currentDateEl) {
+          currentDateEl.textContent = now.toLocaleDateString("en-US", options);
+        }
+      }
+
+      function updateLastUpdatedTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        });
+
+        // Update last updated indicator
+        const lastUpdatedElement = document.querySelector(".last-updated");
+        if (!lastUpdatedElement) {
+          // Create last updated element if it doesn't exist
+          const activitiesHeader =
+            document.querySelector(".section-title").parentElement;
+          const lastUpdated = document.createElement("div");
+          lastUpdated.className = "last-updated";
+          lastUpdated.innerHTML = `<i class="far fa-clock"></i> Last updated: ${timeString}`;
+          activitiesHeader.appendChild(lastUpdated);
+        } else {
+          lastUpdatedElement.innerHTML = `<i class="far fa-clock"></i> Last updated: ${timeString}`;
+        }
+      }
+
+      function startAutoRefresh() {
+        // Clear existing interval
+        if (refreshInterval) {
+          clearInterval(refreshInterval);
+        }
+
+        // Refresh every 30 seconds
+        refreshInterval = setInterval(async () => {
+          console.log("Auto-refreshing admin dashboard...");
+          await loadDashboardStats();
+          await loadRecentActivities();
+        }, 30000); // 30 seconds
+      }
+
+      function addRefreshButton() {
+        // Add refresh button to header
+        const userInfo = document.querySelector(".user-info");
+        const refreshButton = document.createElement("button");
+        refreshButton.className = "action-btn view";
+        refreshButton.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh';
+        refreshButton.onclick = manualRefresh;
+        refreshButton.style.marginLeft = "10px";
+
+        userInfo.appendChild(refreshButton);
+      }
+
+      async function manualRefresh() {
+        const refreshButton = document.querySelector(
+          ".action-btn.view i.fa-sync-alt"
+        );
+
+        // Add spinning animation
+        if (refreshButton) {
+          refreshButton.classList.add("fa-spin");
+        }
+
+        try {
+          await loadDashboardStats();
+          await loadRecentActivities();
+
+          // Show success notification
+          showNotification("Data refreshed successfully!");
+        } catch (error) {
+          console.error("Manual refresh error:", error);
+          showNotification("Refresh failed. Using cached data.", "error");
+        } finally {
+          // Remove spinning animation
+          if (refreshButton) {
+            setTimeout(() => {
+              refreshButton.classList.remove("fa-spin");
+            }, 1000);
+          }
+        }
+      }
+
+      function viewStudentDetails(scholarId) {
+        // This would typically open a modal or navigate to student details
+        console.log("Viewing details for student:", scholarId);
+        alert(
+          `Viewing details for student: ${scholarId}\n\nThis would typically show:\n- Student profile\n- Activity history\n- Health status\n- Attendance records`
+        );
+
+        // In a real implementation, you might:
+        // window.location.href = `student-details.html?id=${scholarId}`;
+        // OR open a modal with student details
+      }
+
+      function showNotification(message, type = "success") {
+        // Create notification element if it doesn't exist
+        let notification = document.getElementById("adminNotification");
+
+        if (!notification) {
+          notification = document.createElement("div");
+          notification.id = "adminNotification";
+          notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        color: white;
+        font-weight: 500;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
+      `;
+          document.body.appendChild(notification);
+        }
+
+        // Set style based on type
+        if (type === "error") {
+          notification.style.background = "var(--color-red-600)";
+        } else {
+          notification.style.background = "var(--color-green-600)";
+        }
+
+        notification.textContent = message;
+        notification.style.display = "block";
+
+        // Hide after 3 seconds
+        setTimeout(() => {
+          notification.style.display = "none";
+        }, 3000);
+      }
+
+      // Stop auto-refresh when page is hidden (to save resources)
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) {
+          if (refreshInterval) {
+            clearInterval(refreshInterval);
+            console.log("Auto-refresh paused (page hidden)");
+          }
+        } else {
+          startAutoRefresh();
+          console.log("Auto-refresh resumed (page visible)");
+        }
+      });
+
+      // Clean up on page unload
+      window.addEventListener("beforeunload", function () {
+        if (refreshInterval) {
+          clearInterval(refreshInterval);
+        }
+      });
+    </script>
+  </body>
+</html>

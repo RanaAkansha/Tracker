@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="View and update your daily activity logs in PRANA Student Dashboard."
+    />
+    <meta
+      name="keywords"
+      content="PRANA dashboard, student activity log, routine tracker"
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta property="og:title" content="PRANA | Student Dashboard" />
+    <meta
+      property="og:description"
+      content="Track, mark, and review your daily tasks easily on PRANA."
+    />
+
+    <title>PRANA | Student Dashboard</title>
+
+    <link rel="icon" type="image/x-icon" href="image.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+      :root {
+        --color-black-600: #2a2c2a;
+        --color-black-500: #000000;
+        --color-black-400: #4b5563;
+        --color-black-200: #e5e7eb;
+        --color-black-100: #f3f4f6;
+        --color-green-600: #059669;
+        --color-green-500: #10b981;
+        --color-green-200: #bbf7d0;
+        --color-green-100: #dcfce7;
+        --color-green-50: #f0fdf4;
+        --color-gray-800: #1f2937;
+        --color-gray-700: #374151;
+        --color-gray-600: #4b5563;
+        --color-gray-500: #6b7280;
+        --color-gray-200: #e5e7eb;
+        --color-gray-100: #f3f4f6;
+        --color-white: #ffffff;
+        --color-blue-100: #dbeafe;
+        --color-blue-600: #2563eb;
+        --color-yellow-100: #fef3c7;
+        --color-yellow-600: #d97706;
+        --color-red-100: #fee2e2;
+        --color-red-600: #dc2626;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #232323 0%, #181616 100%);
+        min-height: 100vh;
+        padding: 2rem 0;
+      }
+
+      .container {
+        max-width: 56rem;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .logo-icon {
+        width: 3rem;
+        height: 3rem;
+        background: var(--color-white);
+        border-radius: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      }
+
+      .logo-icon i {
+        font-size: 1.5rem;
+        color: var(--color-black-600);
+      }
+
+      .logo-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-white);
+      }
+
+      .logo-subtitle {
+        color: var(--color-white);
+        font-size: 0.875rem;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .user-details {
+        text-align: right;
+      }
+
+      .user-name {
+        color: var(--color-white);
+        font-weight: 500;
+      }
+
+      .user-id {
+        color: var(--color-white);
+        font-size: 0.875rem;
+      }
+
+      .avatar-container {
+        position: relative;
+      }
+
+      .avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--color-white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        cursor: pointer;
+      }
+
+      .avatar i {
+        color: var(--color-black-600);
+      }
+
+      .online-indicator {
+        position: absolute;
+        top: -0.25rem;
+        right: -0.25rem;
+        width: 1rem;
+        height: 1rem;
+        background: #10b981;
+        border-radius: 50%;
+        border: 2px solid var(--color-white);
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 1rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .date-progress-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .current-date {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-gray-800);
+      }
+
+      .date-subtitle {
+        color: var(--color-gray-600);
+      }
+
+      .progress-container {
+        display: flex;
+        align-items: center;
+        margin-top: 1rem;
+      }
+
+      .progress-ring-wrapper {
+        position: relative;
+        width: 5rem;
+        height: 5rem;
+        margin-right: 1rem;
+      }
+
+      .progress-ring {
+        width: 5rem;
+        height: 5rem;
+        transform: rotate(-90deg);
+      }
+
+      .progress-ring-bg {
+        cx: 50;
+        cy: 50;
+        r: 40;
+        stroke: var(--color-gray-200);
+        stroke-width: 8;
+        fill: none;
+      }
+
+      .progress-ring-fill {
+        cx: 50;
+        cy: 50;
+        r: 40;
+        stroke: var(--color-black-600);
+        stroke-width: 8;
+        fill: none;
+        stroke-dasharray: 251.2;
+        stroke-dashoffset: 125.6;
+        transition: stroke-dashoffset 0.5s ease;
+      }
+
+      .progress-text {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .progress-text span {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--color-gray-800);
+      }
+
+      .progress-label {
+        color: var(--color-gray-600);
+      }
+
+      .progress-percentage {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-gray-800);
+      }
+
+      /* Activities Section */
+      .activities-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .section-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--color-gray-800);
+      }
+
+      .last-updated {
+        font-size: 0.875rem;
+        color: var(--color-gray-600);
+      }
+
+      .last-updated i {
+        margin-right: 0.25rem;
+      }
+
+      .activities-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .activity-item {
+        padding: 1rem;
+        border: 2px solid;
+        border-radius: 0.75rem;
+        transition: all 0.3s ease;
+      }
+
+      .activity-item:hover {
+        transform: translateY(-3px);
+      }
+
+      .activity-item.completed {
+        border-color: var(--color-green-200);
+        background-color: var(--color-green-50);
+      }
+
+      .activity-item.pending {
+        border-color: var(--color-gray-200);
+        background-color: var(--color-white);
+      }
+
+      .activity-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .activity-icon {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+      }
+
+      .activity-item.completed .activity-icon {
+        background-color: var(--color-green-100);
+      }
+
+      .activity-item.completed .activity-icon i {
+        color: var(--color-green-600);
+        font-size: 1.25rem;
+      }
+
+      .activity-item.pending .activity-icon {
+        background-color: var(--color-gray-100);
+      }
+
+      .activity-item.pending .activity-icon i {
+        color: var(--color-gray-500);
+        font-size: 1.25rem;
+      }
+
+      .activity-details {
+        flex: 1;
+      }
+
+      .activity-title {
+        font-weight: 700;
+        color: var(--color-gray-800);
+      }
+
+      .activity-time {
+        font-size: 0.875rem;
+        color: var(--color-gray-600);
+      }
+
+      .activity-status {
+        display: flex;
+        align-items: center;
+      }
+
+      .status-text {
+        color: var(--color-green-600);
+        font-weight: 500;
+        margin-right: 0.75rem;
+      }
+
+      .status-icon {
+        width: 2.5rem;
+        height: 2.5rem;
+        background: var(--color-green-500);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .status-icon i {
+        color: var(--color-white);
+      }
+
+      .mark-complete-btn {
+        padding: 0.5rem 1rem;
+        background: var(--color-black-600);
+        color: var(--color-white);
+        border: none;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      }
+
+      .mark-complete-btn:hover {
+        background: var(--color-black-500);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.15);
+      }
+
+      .health-subtitle {
+        color: var(--color-gray-600);
+        margin-bottom: 1rem;
+      }
+
+      .health-options {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      .health-option {
+        border: 2px solid var(--color-gray-200);
+        border-radius: 0.75rem;
+        padding: 1rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .health-option:hover {
+        border-color: var(--color-black-600);
+        transform: translateY(-2px);
+      }
+
+      .health-icon {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 0.5rem;
+      }
+
+      .health-icon.excellent {
+        background-color: var(--color-green-100);
+      }
+
+      .health-icon.excellent i {
+        color: var(--color-green-600);
+        font-size: 1.25rem;
+      }
+
+      .health-icon.good {
+        background-color: var(--color-blue-100);
+      }
+
+      .health-icon.good i {
+        color: var(--color-blue-600);
+        font-size: 1.25rem;
+      }
+
+      .health-icon.fair {
+        background-color: var(--color-yellow-100);
+      }
+
+      .health-icon.fair i {
+        color: var(--color-yellow-600);
+        font-size: 1.25rem;
+      }
+
+      .health-icon.not-well {
+        background-color: var(--color-red-100);
+      }
+
+      .health-icon.not-well i {
+        color: var(--color-red-600);
+        font-size: 1.25rem;
+      }
+
+      .health-label {
+        font-weight: 500;
+        color: var(--color-gray-800);
+      }
+
+      .health-notes {
+        margin-top: 1rem;
+      }
+
+      .notes-label {
+        display: block;
+        color: var(--color-gray-700);
+        margin-bottom: 0.5rem;
+      }
+
+      .notes-textarea {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--color-gray-300);
+        border-radius: 0.5rem;
+        font-family: "Poppins", sans-serif;
+        resize: vertical;
+        min-height: 5rem;
+      }
+
+      .notes-textarea:focus {
+        outline: none;
+        border-color: var(--color-black-600);
+        box-shadow: 0 0 0 2px rgba(42, 44, 42, 0.2);
+      }
+
+      .week-days {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+      }
+
+      .day-name {
+        color: var(--color-gray-600);
+        font-size: 0.875rem;
+      }
+
+      .day-status {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0.5rem auto 0;
+      }
+
+      .day-status.completed {
+        background: var(--color-green-500);
+      }
+
+      .day-status.completed i {
+        color: var(--color-white);
+        font-size: 0.875rem;
+      }
+
+      .day-status.in-progress {
+        background: var(--color-green-100);
+      }
+
+      .day-status.in-progress span {
+        color: var(--color-gray-600);
+        font-weight: 500;
+      }
+
+      .day-status.pending {
+        background: var(--color-gray-200);
+      }
+
+      .day-status.pending span {
+        color: var(--color-gray-500);
+        font-size: 0.875rem;
+      }
+
+      .footer {
+        margin-top: 2rem;
+        text-align: center;
+      }
+
+      .footer-text {
+        color: var(--color-white);
+        font-size: 0.875rem;
+      }
+      .footer-text > a {
+        text-decoration: none;
+        color: var(--color-blue-600);
+      }
+
+      .notification {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        background: var(--color-green-500);
+        color: var(--color-white);
+        padding: 1rem;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        transform: translateY(4rem);
+        transition: transform 0.3s;
+        display: none;
+      }
+
+      .notification.show {
+        transform: translateY(0);
+        display: block;
+      }
+
+      .notification-content {
+        display: flex;
+        align-items: center;
+      }
+
+      .notification-content i {
+        margin-right: 0.5rem;
+      }
+
+      /* Responsive Design */
+      @media (min-width: 768px) {
+        .date-progress-content {
+          flex-direction: row;
+        }
+
+        .progress-container {
+          margin-top: 0;
+        }
+
+        .health-options {
+          grid-template-columns: repeat(4, 1fr);
+        }
+
+        .activity-content {
+          justify-content: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <i class="fas fa-spa"></i>
+          </div>
+          <div>
+            <h1 class="logo-title">PRANA</h1>
+            <p class="logo-subtitle">Student Dashboard</p>
+          </div>
+        </div>
+        <div class="user-info">
+          <div class="user-details">
+            <p class="user-name" id="studentName">Akansha Rana</p>
+            <p class="user-id" id="studentId">Scholar ID: 23144003</p>
+          </div>
+          <div class="avatar-container">
+            <div class="avatar">
+              <i class="fas fa-user"></i>
+            </div>
+            <div class="online-indicator"></div>
+          </div>
+        </div>
+      </header>
+
+      <div class="card date-progress-card">
+        <div class="date-progress-content">
+          <div class="date-info">
+            <h2 class="current-date" id="currentDate">
+              Thursday, October 16, 2025
+            </h2>
+            <p class="date-subtitle">
+              Complete your daily activities to maintain your discipline record
+            </p>
+          </div>
+          <div class="progress-container">
+            <div class="progress-ring-wrapper">
+              <svg class="progress-ring" viewBox="0 0 100 100">
+                <circle
+                  class="progress-ring-bg"
+                  cx="50"
+                  cy="50"
+                  r="40"
+                ></circle>
+                <circle
+                  class="progress-ring-fill"
+                  cx="50"
+                  cy="50"
+                  r="40"
+                ></circle>
+              </svg>
+              <div class="progress-text">
+                <span>2/5</span>
+              </div>
+            </div>
+            <div class="progress-details">
+              <p class="progress-label">Today's Progress</p>
+              <p class="progress-percentage">40%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card activities-card">
+        <div class="activities-header">
+          <h3 class="section-title">Daily Activities</h3>
+          <div class="last-updated">
+            <i class="far fa-clock"></i>
+            <span id="lastUpdated">Last updated: 09:45 AM</span>
+          </div>
+        </div>
+
+        <div class="activities-list" id="activitiesList">
+          <!-- Activity 1 -->
+          <div class="activity-item completed">
+            <div class="activity-content">
+              <div class="activity-icon">
+                <i class="fas fa-pray"></i>
+              </div>
+              <div class="activity-details">
+                <h4 class="activity-title">Morning Prayer</h4>
+                <p class="activity-time">5:00 AM - 5:30 AM</p>
+              </div>
+            </div>
+            <div class="activity-status">
+              <span class="status-text">Completed</span>
+              <div class="status-icon">
+                <i class="fas fa-check"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity 2 -->
+          <div class="activity-item completed">
+            <div class="activity-content">
+              <div class="activity-icon">
+                <i class="fas fa-spa"></i>
+              </div>
+              <div class="activity-details">
+                <h4 class="activity-title">Yoga</h4>
+                <p class="activity-time">5:30 AM - 6:00 AM</p>
+              </div>
+            </div>
+            <div class="activity-status">
+              <span class="status-text">Completed</span>
+              <div class="status-icon">
+                <i class="fas fa-check"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="activity-item completed">
+            <div class="activity-content">
+              <div class="activity-icon">
+                <i class="fas fa-spa"></i>
+              </div>
+              <div class="activity-details">
+                <h4 class="activity-title">Yagya</h4>
+                <p class="activity-time">6:00 AM - 7:00 AM</p>
+              </div>
+            </div>
+            <div class="activity-status">
+              <span class="status-text">Completed</span>
+              <div class="status-icon">
+                <i class="fas fa-check"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Activity 3 -->
+          <div class="activity-item pending">
+            <div class="activity-content">
+              <div class="activity-icon">
+                <i class="fa-solid fa-broom"></i>
+              </div>
+              <div class="activity-details">
+                <h4 class="activity-title">Shramdaan</h4>
+                <p class="activity-time">4:00 PM - 5:00 PM</p>
+              </div>
+            </div>
+            <button class="mark-complete-btn">Mark Complete</button>
+          </div>
+
+          <!-- Activity 4 -->
+          <div class="activity-item pending">
+            <div class="activity-content">
+              <div class="activity-icon">
+                <i class="fas fa-brain"></i>
+              </div>
+              <div class="activity-details">
+                <h4 class="activity-title">Naad Yog</h4>
+                <p class="activity-time">6:00 PM - 6:15 PM</p>
+              </div>
+            </div>
+            <button class="mark-complete-btn">Mark Complete</button>
+          </div>
+
+          <!-- Activity 5 -->
+          <div class="activity-item pending">
+            <div class="activity-content">
+              <div class="activity-icon">
+                <i class="fas fa-hands-praying"></i>
+              </div>
+              <div class="activity-details">
+                <h4 class="activity-title">Evening Prayer</h4>
+                <p class="activity-time">8:00 PM - 8:30 PM</p>
+              </div>
+            </div>
+            <button class="mark-complete-btn">Mark Complete</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card health-card">
+        <h3 class="section-title">Health Status</h3>
+        <p class="health-subtitle">How are you feeling today?</p>
+
+        <div class="health-options">
+          <div class="health-option">
+            <div class="health-icon excellent">
+              <i class="fas fa-laugh-beam"></i>
+            </div>
+            <p class="health-label">Excellent</p>
+          </div>
+          <div class="health-option">
+            <div class="health-icon good">
+              <i class="fas fa-smile"></i>
+            </div>
+            <p class="health-label">Good</p>
+          </div>
+          <div class="health-option">
+            <div class="health-icon fair">
+              <i class="fas fa-meh"></i>
+            </div>
+            <p class="health-label">Fair</p>
+          </div>
+          <div class="health-option">
+            <div class="health-icon not-well">
+              <i class="fas fa-frown"></i>
+            </div>
+            <p class="health-label">Not Well</p>
+          </div>
+        </div>
+
+        <!-- <div class="health-notes">
+          <label for="healthNotes" class="notes-label"
+            >Additional Notes (Optional)</label
+          >
+          <textarea
+            id="healthNotes"
+            class="notes-textarea"
+            placeholder="Any specific health concerns or notes..."
+          ></textarea>
+        </div> -->
+      </div>
+
+      <!-- Weekly Progress -->
+      <!-- <div class="card weekly-progress-card">
+        <h3 class="section-title">Weekly Progress</h3>
+        <div class="week-days">
+          <div class="day">
+            <p class="day-name">Mon</p>
+            <div class="day-status completed">
+              <i class="fas fa-check"></i>
+            </div>
+          </div>
+          <div class="day">
+            <p class="day-name">Tue</p>
+            <div class="day-status completed">
+              <i class="fas fa-check"></i>
+            </div>
+          </div>
+          <div class="day">
+            <p class="day-name">Wed</p>
+            <div class="day-status in-progress">
+              <span>2/5</span>
+            </div>
+          </div>
+          <div class="day">
+            <p class="day-name">Thu</p>
+            <div class="day-status pending">
+              <span>-</span>
+            </div>
+          </div>
+          <div class="day">
+            <p class="day-name">Fri</p>
+            <div class="day-status pending">
+              <span>-</span>
+            </div>
+          </div>
+          <div class="day">
+            <p class="day-name">Sat</p>
+            <div class="day-status pending">
+              <span>-</span>
+            </div>
+          </div>
+          <div class="day">
+            <p class="day-name">Sun</p>
+            <div class="day-status pending">
+              <span>-</span>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Footer -->
+      <footer class="footer">
+        <p class="footer-text">
+          PRANA - Productivity & Routine Activity Noting Application
+        </p>
+        <p class="footer-text"><a href="contact.html">Contact Us</a></p>
+      </footer>
+    </div>
+
+    <!-- Success Notification -->
+    <div id="successNotification" class="notification">
+      <div class="notification-content">
+        <i class="fas fa-check-circle"></i>
+        <span>Activity marked as completed!</span>
+      </div>
+    </div>
+
+    <script>
+      // Simple authentication check
+      document.addEventListener("DOMContentLoaded", function () {
+        const student = localStorage.getItem("student");
+        console.log("Student auth check:", student);
+
+        if (!student) {
+          alert("Please login first");
+          window.location.href = "index.html";
+          return;
+        }
+
+        // If logged in, load the dashboard
+        initStudentDashboard();
+      });
+
+      const API_URL = "http://localhost:3000";
+      let currentStudent = null;
+
+      async function initStudentDashboard() {
+        currentStudent = JSON.parse(localStorage.getItem("student"));
+
+        // Update student info
+        document.getElementById("studentName").textContent =
+          currentStudent.name || "Akansha Rana";
+        document.getElementById("studentId").textContent = `Scholar ID: ${
+          currentStudent.scholar_id || "23144003"
+        }`;
+
+        // Check and reset activities for new day
+        checkAndResetActivities();
+
+        // Load data
+        setCurrentDate();
+        setupHealthOptions();
+        updateLastUpdatedTime();
+        setupMarkCompleteButtons();
+        updateProgress();
+      }
+
+      function checkAndResetActivities() {
+        const today = new Date().toDateString();
+        const lastResetDate = localStorage.getItem("lastResetDate");
+
+        console.log("Today:", today);
+        console.log("Last reset date:", lastResetDate);
+
+        // Reset if it's a new day or first time
+        if (!lastResetDate || lastResetDate !== today) {
+          console.log("New day detected - resetting all activities to pending");
+          resetAllActivities();
+          localStorage.setItem("lastResetDate", today);
+
+          // Show notification about reset
+          setTimeout(() => {
+            showResetNotification();
+          }, 1000);
+        } else {
+          console.log("Same day - activities already reset today");
+        }
+      }
+
+      function resetAllActivities() {
+        const activitiesList = document.getElementById("activitiesList");
+        const activityItems = activitiesList.querySelectorAll(".activity-item");
+
+        activityItems.forEach((activity) => {
+          // Reset to pending state
+          activity.classList.remove("completed");
+          activity.classList.add("pending");
+
+          // Remove any existing status and add Mark Complete button
+          const statusSection = activity.querySelector(".activity-status");
+          const existingButton = activity.querySelector(".mark-complete-btn");
+
+          if (statusSection) {
+            // Replace status with button
+            const button = document.createElement("button");
+            button.className = "mark-complete-btn";
+            button.textContent = "Mark Complete";
+            statusSection.replaceWith(button);
+          } else if (!existingButton) {
+            // Add button if it doesn't exist
+            const button = document.createElement("button");
+            button.className = "mark-complete-btn";
+            button.textContent = "Mark Complete";
+            activity.appendChild(button);
+          }
+        });
+
+        // Reset health status
+        document.querySelectorAll(".health-option").forEach((opt) => {
+          opt.style.borderColor = "var(--color-gray-200)";
+          opt.style.backgroundColor = "";
+        });
+
+        console.log("All activities reset to pending for new day");
+      }
+
+      function showResetNotification() {
+        const notification = document.getElementById("successNotification");
+        const notificationContent = notification.querySelector(
+          ".notification-content"
+        );
+
+        notificationContent.innerHTML = `
+      <i class="fas fa-sync-alt"></i>
+      <span>Activities reset for new day! Start fresh.</span>
+    `;
+
+        notification.classList.add("show");
+
+        setTimeout(() => {
+          notification.classList.remove("show");
+        }, 4000);
+      }
+
+      function setupMarkCompleteButtons() {
+        document.addEventListener("click", function (e) {
+          if (e.target.classList.contains("mark-complete-btn")) {
+            const activityItem = e.target.closest(".activity-item");
+
+            // Update the UI immediately
+            activityItem.classList.remove("pending");
+            activityItem.classList.add("completed");
+
+            // Create the completed status HTML
+            const statusHTML = `
+          <div class="activity-status">
+            <span class="status-text">Completed</span>
+            <div class="status-icon">
+              <i class="fas fa-check"></i>
+            </div>
+          </div>
+        `;
+
+            // Replace the button with the status HTML
+            e.target.outerHTML = statusHTML;
+
+            // Update progress
+            updateProgress();
+            showNotification("Activity marked as completed!");
+          }
+        });
+      }
+
+      function setupHealthOptions() {
+        document.querySelectorAll(".health-option").forEach((option) => {
+          option.addEventListener("click", function () {
+            const healthLabel = this.querySelector(".health-label").textContent;
+
+            document.querySelectorAll(".health-option").forEach((opt) => {
+              opt.style.borderColor = "var(--color-gray-200)";
+              opt.style.backgroundColor = "";
+            });
+            this.style.borderColor = "var(--color-black-600)";
+            this.style.backgroundColor = "var(--color-black-100)";
+
+            // Show confirmation
+            showNotification(`Health status set to: ${healthLabel}`);
+          });
+        });
+      }
+
+      function setCurrentDate() {
+        const now = new Date();
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        document.getElementById("currentDate").textContent =
+          now.toLocaleDateString("en-US", options);
+      }
+
+      function updateProgress() {
+        const completedActivities = document.querySelectorAll(
+          ".activity-item.completed"
+        ).length;
+        const totalActivities =
+          document.querySelectorAll(".activity-item").length;
+        const progressPercentage =
+          (completedActivities / totalActivities) * 100;
+
+        // Update progress text
+        document.querySelector(
+          ".progress-text span"
+        ).textContent = `${completedActivities}/${totalActivities}`;
+
+        // Update progress ring
+        const circumference = 2 * Math.PI * 40;
+        const offset =
+          circumference - (progressPercentage / 100) * circumference;
+        document.querySelector(".progress-ring-fill").style.strokeDashoffset =
+          offset;
+
+        // Update percentage
+        document.querySelector(
+          ".progress-percentage"
+        ).textContent = `${Math.round(progressPercentage)}%`;
+
+        // Update weekly progress for current day
+        updateWeeklyProgress(completedActivities, totalActivities);
+      }
+
+      function updateWeeklyProgress(completed, total) {
+        const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+        const today = new Date().getDay(); // 0 = Sunday, 1 = Monday, etc.
+        const todayElement = document.querySelector(
+          `.day:nth-child(${today + 1}) .day-status`
+        );
+
+        if (todayElement) {
+          if (completed === total) {
+            // All activities completed
+            todayElement.className = "day-status completed";
+            todayElement.innerHTML = '<i class="fas fa-check"></i>';
+          } else if (completed > 0) {
+            // Some activities completed
+            todayElement.className = "day-status in-progress";
+            todayElement.innerHTML = `<span>${completed}/${total}</span>`;
+          } else {
+            // No activities completed
+            todayElement.className = "day-status pending";
+            todayElement.innerHTML = "<span>-</span>";
+          }
+        }
+      }
+
+      function updateLastUpdatedTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        document.getElementById(
+          "lastUpdated"
+        ).textContent = `Last updated: ${timeString}`;
+      }
+
+      function showNotification(message) {
+        const notification = document.getElementById("successNotification");
+        const notificationContent = notification.querySelector(
+          ".notification-content"
+        );
+
+        notificationContent.innerHTML = `
+      <i class="fas fa-check-circle"></i>
+      <span>${message}</span>
+    `;
+
+        notification.classList.add("show");
+
+        setTimeout(() => {
+          notification.classList.remove("show");
+        }, 3000);
+      }
+
+      // Manual reset function for testing
+      function manualReset() {
+        if (
+          confirm(
+            "Reset all activities to pending? This will clear your progress for today."
+          )
+        ) {
+          resetAllActivities();
+          updateProgress();
+          showNotification("Activities reset manually!");
+        }
+      }
+
+      // Add manual reset button to header (optional)
+      document.addEventListener("DOMContentLoaded", function () {
+        // Add reset button to header
+        const header = document.querySelector(".header");
+        const resetButton = document.createElement("button");
+        resetButton.className = "mark-complete-btn";
+        resetButton.textContent = "Reset Day";
+        resetButton.onclick = manualReset;
+        resetButton.style.marginLeft = "10px";
+        resetButton.style.background = "var(--color-red-600)";
+
+        const userInfo = document.querySelector(".user-info");
+        userInfo.appendChild(resetButton);
+      });
+
+      // Auto-update time every minute
+      setInterval(updateLastUpdatedTime, 60000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Get in touch with the PRANA team or your hostel warden for queries and support."
+    />
+    <meta
+      name="keywords"
+      content="PRANA contact, support, hostel warden, student helpdesk, feedback"
+    />
+    <meta name="author" content="Akansha Rana" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="PRANA | Contact" />
+    <meta
+      property="og:description"
+      content="Reach out to hostel authorities or PRANA support team for assistance."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./images/banner.png" />
+
+    <title>Contact Us - PRANA</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link rel="icon" type="image/x-icon" href="image.png" />
+
+    <style>
+      :root {
+        --color-black-600: #2a2c2a;
+        --color-black-500: #000000;
+        --color-black-200: #e5e7eb;
+        --color-black-100: #f3f4f6;
+        --color-green-600: #059669;
+        --color-green-500: #10b981;
+        --color-gray-800: #1f2937;
+        --color-gray-600: #4b5563;
+        --color-white: #ffffff;
+        --color-red-600: #dc2626;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #232323 0%, #181616 100%);
+        color: var(--color-white);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--color-white);
+        margin-bottom: 0.5rem;
+      }
+
+      p.subtitle {
+        color: var(--color-gray-600);
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+
+      .contact-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        width: 100%;
+        max-width: 1000px;
+      }
+
+      .contact-form {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      }
+
+      .contact-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--color-white);
+      }
+
+      .contact-form input,
+      .contact-form select,
+      .contact-form textarea {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid var(--color-black-200);
+        border-radius: 0.5rem;
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--color-white);
+        font-size: 1rem;
+        transition: border 0.2s ease;
+      }
+
+      .contact-form select {
+        color: var(--color-white);
+      }
+
+      .contact-form select option {
+        background: var(--color-gray-800);
+        color: var(--color-white);
+      }
+
+      .contact-form input:focus,
+      .contact-form select:focus,
+      .contact-form textarea:focus {
+        border-color: var(--color-green-500);
+        outline: none;
+      }
+
+      .contact-form button {
+        width: 100%;
+        background: var(--color-green-500);
+        color: var(--color-white);
+        border: none;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .contact-form button:hover {
+        background: var(--color-green-600);
+        transform: translateY(-2px);
+      }
+
+      .contact-form button:disabled {
+        background: var(--color-gray-600);
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 1rem;
+        padding: 2rem;
+      }
+
+      .warden-card {
+        margin-bottom: 1rem;
+        padding: 1rem;
+        border-left: 4px solid var(--color-green-500);
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 0.5rem;
+      }
+
+      .warden-card h3 {
+        color: var(--color-white);
+        font-size: 1.1rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .warden-card p {
+        font-size: 0.9rem;
+        color: var(--color-gray-600);
+      }
+
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        color: white;
+        font-weight: 500;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+        display: none;
+      }
+
+      .notification.success {
+        background: var(--color-green-600);
+        display: block;
+      }
+
+      .notification.error {
+        background: var(--color-red-600);
+        display: block;
+      }
+
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 10px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      footer {
+        margin-top: 2rem;
+        text-align: center;
+        color: var(--color-gray-600);
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 768px) {
+        .contact-container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Contact Us</h1>
+    <p class="subtitle">
+      Need help or have suggestions? Reach out to your hostel warden or the
+      PRANA team.
+    </p>
+
+    <div class="contact-container">
+      <form class="contact-form" id="contactForm">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required />
+
+        <label for="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="Enter your email"
+          required
+        />
+
+        <label for="scholarId">Scholar ID</label>
+        <input
+          type="text"
+          id="scholarId"
+          placeholder="e.g., 23144003"
+          required
+        />
+
+        <label for="hostel">Hostel</label>
+        <select id="hostel" required>
+          <option value="">Select Hostel</option>
+          <option value="Nivedita">Nivedita Hostel</option>
+          <option value="Sanghmitra">Sanghmitra Hostel</option>
+          <option value="Arvind">Arvind Hostel</option>
+          <option value="Panini">Panini Hostel</option>
+        </select>
+
+        <label for="queryType">Query Type</label>
+        <select id="queryType" required>
+          <option value="">Select Query Type</option>
+          <option value="Technical">Technical Issue</option>
+          <option value="Activity Log">Activity Log Query</option>
+          <option value="Health">Health Concern</option>
+          <option value="Feedback">General Feedback</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          placeholder="Describe your issue or feedback..."
+          rows="5"
+          required
+        ></textarea>
+
+        <button type="button" id="emailBtn">
+          <i class="fas fa-envelope"></i> Send to Admin Email
+        </button>
+
+        <button type="submit" id="submitBtn" style="margin-top: 10px">
+          <span id="btnText">Save to System</span>
+          <span id="btnLoading" class="loading" style="display: none"></span>
+        </button>
+      </form>
+
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <div class="warden-card">
+          <h3>Nivedita Hostel</h3>
+          <p><i class="fa-solid fa-envelope"></i> nivedita.hostel@dsvv.ac.in</p>
+          <p><i class="fa-solid fa-phone"></i> +91-XXXXXXXXXX</p>
+        </div>
+        <div class="warden-card">
+          <h3>Sanghmitra Hostel</h3>
+          <p>
+            <i class="fa-solid fa-envelope"></i> sanghmitra.hostel@dsvv.ac.in
+          </p>
+          <p><i class="fa-solid fa-phone"></i> +91-XXXXXXXXXX</p>
+        </div>
+        <div class="warden-card">
+          <h3>Arvind Hostel</h3>
+          <p><i class="fa-solid fa-envelope"></i> arvind.hostel@dsvv.ac.in</p>
+          <p><i class="fa-solid fa-phone"></i> +91-XXXXXXXXXX</p>
+        </div>
+        <div class="warden-card">
+          <h3>Panini Hostel</h3>
+          <p><i class="fa-solid fa-envelope"></i> panini.hostel@dsvv.ac.in</p>
+          <p><i class="fa-solid fa-phone"></i> +91-XXXXXXXXXX</p>
+        </div>
+
+        <div
+          class="warden-card"
+          style="border-left-color: var(--color-green-500); margin-top: 1rem"
+        >
+          <h3>PRANA Support Team</h3>
+          <p><i class="fa-solid fa-envelope"></i> support@prana.dsvv.ac.in</p>
+          <p><i class="fa-solid fa-phone"></i> +91-XXXXXXXXXX</p>
+          <p><i class="fa-solid fa-clock"></i> 9:00 AM - 6:00 PM</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <footer>
+      <p>© 2025 PRANA. All rights reserved.</p>
+    </footer>
+
+    <script>
+      const API_URL = "http://localhost:3000";
+
+      // Email functionality
+      document
+        .getElementById("emailBtn")
+        .addEventListener("click", function () {
+          sendEmailToAdmin();
+        });
+
+      // Original form submission
+      document
+        .getElementById("contactForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          await saveMessageToSystem();
+        });
+
+      function sendEmailToAdmin() {
+        const formData = getFormData();
+
+        if (!validateForm(formData)) {
+          return;
+        }
+
+        const subject = `PRANA Contact: ${formData.query_type} from ${formData.name}`;
+        const body = `
+Name: ${formData.name}
+Email: ${formData.email}
+Scholar ID: ${formData.scholar_id}
+Hostel: ${formData.hostel}
+Query Type: ${formData.query_type}
+
+Message:
+${formData.message}
+
+---
+Sent from PRANA System
+    `.trim();
+
+        const mailtoLink = `mailto:akansharana0620@gmail.com?subject=${encodeURIComponent(
+          subject
+        )}&body=${encodeURIComponent(body)}`;
+
+        // Open email client
+        window.location.href = mailtoLink;
+
+        // Also save to system
+        saveMessageToSystem();
+
+        showNotification(
+          "Email client opened! Please send the pre-filled email.",
+          "success"
+        );
+      }
+
+      async function saveMessageToSystem() {
+        const submitBtn = document.getElementById("submitBtn");
+        const btnText = document.getElementById("btnText");
+        const btnLoading = document.getElementById("btnLoading");
+
+        const formData = getFormData();
+
+        if (!validateForm(formData)) {
+          return;
+        }
+
+        // Show loading state
+        submitBtn.disabled = true;
+        btnText.textContent = "Saving...";
+        btnLoading.style.display = "inline-block";
+
+        try {
+          // Try to send to backend API
+          const response = await fetch(`${API_URL}/api/contact/submit`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ...formData,
+              created_at: new Date().toISOString(),
+            }),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            showNotification(
+              "Message saved to system successfully!",
+              "success"
+            );
+            resetForm();
+          } else {
+            throw new Error(data.message || "Failed to save message");
+          }
+        } catch (error) {
+          console.error("Error saving message:", error);
+
+          // If backend fails, store locally
+          storeMessageLocally(formData);
+          showNotification("Message saved locally!", "success");
+          resetForm();
+        } finally {
+          // Reset button state
+          submitBtn.disabled = false;
+          btnText.textContent = "Save to System";
+          btnLoading.style.display = "none";
+        }
+      }
+
+      function getFormData() {
+        return {
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          scholar_id: document.getElementById("scholarId").value,
+          hostel: document.getElementById("hostel").value,
+          query_type: document.getElementById("queryType").value,
+          message: document.getElementById("message").value,
+        };
+      }
+
+      function validateForm(data) {
+        if (
+          !data.name ||
+          !data.email ||
+          !data.scholar_id ||
+          !data.hostel ||
+          !data.query_type ||
+          !data.message
+        ) {
+          showNotification("Please fill in all fields.", "error");
+          return false;
+        }
+
+        // Basic email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(data.email)) {
+          showNotification("Please enter a valid email address.", "error");
+          return false;
+        }
+
+        // Scholar ID validation (6-8 digits)
+        const scholarIdRegex = /^\d{6,8}$/;
+        if (!scholarIdRegex.test(data.scholar_id)) {
+          showNotification(
+            "Please enter a valid Scholar ID (6-8 digits).",
+            "error"
+          );
+          return false;
+        }
+
+        return true;
+      }
+
+      function storeMessageLocally(message) {
+        const storedMessages = JSON.parse(
+          localStorage.getItem("prana_contact_messages") || "[]"
+        );
+        storedMessages.push({
+          ...message,
+          id: Date.now(),
+          status: "pending",
+          date: new Date().toISOString(),
+        });
+        localStorage.setItem(
+          "prana_contact_messages",
+          JSON.stringify(storedMessages)
+        );
+
+        console.log("Message stored locally:", message);
+      }
+
+      function showNotification(message, type) {
+        const notification = document.getElementById("notification");
+        notification.textContent = message;
+        notification.className = `notification ${type}`;
+
+        setTimeout(() => {
+          notification.style.display = "none";
+        }, 5000);
+      }
+
+      function resetForm() {
+        document.getElementById("contactForm").reset();
+      }
+
+      // Auto-fill for logged-in students
+      document.addEventListener("DOMContentLoaded", function () {
+        const student = JSON.parse(localStorage.getItem("student"));
+
+        if (student) {
+          document.getElementById("name").value = student.name || "";
+          document.getElementById("scholarId").value = student.scholar_id || "";
+
+          if (student.email) {
+            document.getElementById("email").value = student.email;
+          } else if (student.scholar_id) {
+            document.getElementById(
+              "email"
+            ).value = `${student.scholar_id}@dsvv.ac.in`;
+          }
+        }
+      });
+
+      // Add some interactivity to the form
+      document
+        .getElementById("queryType")
+        .addEventListener("change", function (e) {
+          const messageField = document.getElementById("message");
+
+          const hints = {
+            Technical: "Describe the technical issue you are facing...",
+            "Activity Log": "Tell us about your activity logging problem...",
+            Health: "Share your health concerns...",
+            Feedback: "We value your feedback...",
+            Other: "How can we help you?",
+          };
+
+          messageField.placeholder =
+            hints[e.target.value] || "Describe your issue or feedback...";
+        });
+    </script>
+  </body>
+</html>
