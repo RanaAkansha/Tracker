@@ -26,883 +26,975 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
+    <style>
       :root {
-        --color-black-600: #2a2c2a;
-        --color-black-500: #000000;
-        --color-black-400: #4b5563;
-        --color-black-200: #e5e7eb;
-        --color-black-100: #f3f4f6;
-        --color-green-600: #059669;
-        --color-green-500: #10b981;
-        --color-green-200: #bbf7d0;
-        --color-green-100: #dcfce7;
-        --color-green-50: #f0fdf4;
-        --color-gray-800: #1f2937;
-        --color-gray-700: #374151;
-        --color-gray-600: #4b5563;
-        --color-gray-500: #6b7280;
-        --color-gray-200: #e5e7eb;
-        --color-gray-100: #f3f4f6;
-        --color-white: #ffffff;
-        --color-blue-100: #dbeafe;
-        --color-blue-600: #2563eb;
-        --color-yellow-100: #fef3c7;
-        --color-yellow-600: #d97706;
-        --color-red-100: #fee2e2;
-        --color-red-600: #dc2626;
+        --bg-black: #070707;
+        --header-grad-a: #000000;
+        --header-grad-b: #151515;
+        --card-white: #ffffff;
+        --muted: #6b7280;
+        --muted-2: #8b97a6;
+        --border: #e6e9ee;
+        --accent-blue: #1f6feb;
+        --accent-yellow: #f59e0b;
+        --success: #16a34a;
+        --danger: #dc2626;
+        --card-radius: 12px;
+        --soft-shadow: 0 6px 20px rgba(2, 6, 23, 0.18);
+        --btn-shadow-soft: 0 6px 12px rgba(2, 6, 23, 0.12);
+        --btn-shadow-heavier: 0 8px 22px rgba(2, 6, 23, 0.28);
+        --glass: rgba(255, 255, 255, 0.04);
       }
 
+      /* =========================
+         RESET
+         ========================= */
       * {
+        box-sizing: border-box;
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
       }
-
+      html,
       body {
-        font-family: "Poppins", sans-serif;
-        background: linear-gradient(135deg, #232323 0%, #181616 100%);
-        min-height: 100vh;
-        padding: 2rem 0;
+        height: 100%;
+      }
+      body {
+        font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+        background: var(--bg-black);
+        color: #0b1220;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        line-height: 1.45;
+        padding: 0.75rem 0;
       }
 
       .container {
-        max-width: 56rem;
+        width: 92%;
+        max-width: 1100px;
         margin: 0 auto;
-        padding: 0 1rem;
+        padding: 0 0.5rem;
       }
 
+      /* =========================
+         HEADER - black gradient bar
+         Responsive placement for mobile and desktop
+         ========================= */
       .header {
+        background: linear-gradient(
+          90deg,
+          var(--header-grad-a),
+          var(--header-grad-b)
+        );
+        color: #fff;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 2rem;
+        padding: 1rem;
+        border-radius: 14px;
+        box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+        margin: 0.5rem 0 1.25rem;
+        gap: 1rem;
       }
 
       .logo-container {
         display: flex;
         align-items: center;
-        gap: 0.75rem;
+        gap: 0.85rem;
+        min-width: 0;
       }
 
       .logo-icon {
-        width: 3rem;
-        height: 3rem;
-        background: var(--color-white);
-        border-radius: 0.75rem;
+        width: 48px;
+        height: 48px;
+        background: #fff;
+        color: var(--header-grad-a);
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border-radius: 12px;
+        flex-shrink: 0;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
       }
 
       .logo-icon i {
-        font-size: 1.5rem;
-        color: var(--color-black-600);
+        font-size: 18px;
       }
-
       .logo-title {
-        font-size: 1.5rem;
+        font-size: 1.15rem;
         font-weight: 700;
-        color: var(--color-white);
+        color: #fff;
+        line-height: 1;
       }
-
       .logo-subtitle {
-        color: var(--color-white);
-        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 12px;
       }
 
+      /* Right side: student info + controls */
       .user-info {
         display: flex;
         align-items: center;
         gap: 1rem;
+        flex-wrap: wrap;
       }
 
       .user-details {
         text-align: right;
+        min-width: 165px;
       }
 
       .user-name {
-        color: var(--color-white);
-        font-weight: 500;
+        color: #fff;
+        font-weight: 700;
+        font-size: 0.96rem;
       }
-
       .user-id {
-        color: var(--color-white);
-        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: 0.78rem;
+        margin-top: 3px;
       }
 
-      .avatar-container {
-        position: relative;
+      .streak-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+        min-width: 48px;
       }
 
-      .avatar {
-        width: 2.5rem;
-        height: 2.5rem;
-        background: var(--color-white);
+      .streak-circle {
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-yellow), #ffbf66);
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        box-shadow: 0 12px 36px rgba(245, 158, 11, 0.18);
+        transition: transform 0.18s ease;
+      }
+      .streak-circle:hover {
+        transform: scale(1.05);
+      }
+      .streak-circle i {
+        color: #111;
+      }
+      .streak-count {
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.18);
+        padding: 2px 8px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .reset-day-btn {
+        padding: 0.45rem 0.8rem;
+        background: #fff;
+        color: #111;
+        border: none;
+        border-radius: 10px;
+        font-weight: 700;
         cursor: pointer;
+        box-shadow: var(--btn-shadow-soft);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      .reset-day-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--btn-shadow-heavier);
       }
 
-      .avatar i {
-        color: var(--color-black-600);
+      /* On very small screens layout stacks */
+      @media (max-width: 520px) {
+        .header {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.75rem;
+          padding: 0.9rem;
+        }
+        .user-info {
+          justify-content: space-between;
+          align-items: center;
+        }
+        .user-details {
+          text-align: left;
+          min-width: 0;
+        }
       }
 
-      .online-indicator {
-        position: absolute;
-        top: -0.25rem;
-        right: -0.25rem;
-        width: 1rem;
-        height: 1rem;
-        background: #10b981;
-        border-radius: 50%;
-        border: 2px solid var(--color-white);
-      }
-
+      /* =========================
+         CARDS - white panels with soft shadows
+         slight rounded corners
+         ========================= */
       .card {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 1rem;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
+        background: var(--card-white);
+        border-radius: var(--card-radius);
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        border: 1px solid rgba(15, 23, 42, 0.04);
+        box-shadow: var(--soft-shadow);
+        transition: transform 0.22s ease, box-shadow 0.22s ease,
+          opacity 0.22s ease;
+        will-change: transform;
+      }
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 18px 40px rgba(2, 6, 23, 0.2);
       }
 
+      .card.compact {
+        padding: 0.9rem;
+      }
+
+      /* Smooth entrance animation for cards (used on load) */
+      .card.animate-in {
+        opacity: 0;
+        transform: translateY(10px) scale(0.998);
+      }
+      .card.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      /* =========================
+         DATE & PROGRESS
+         ========================= */
       .date-progress-content {
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
-        align-items: center;
+        gap: 0.9rem;
+      }
+      @media (min-width: 768px) {
+        .date-progress-content {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+        }
       }
 
       .current-date {
-        font-size: 1.5rem;
+        font-size: 1.18rem;
         font-weight: 700;
-        color: var(--color-gray-800);
+        color: #0b1220;
       }
-
       .date-subtitle {
-        color: var(--color-gray-600);
+        color: var(--muted-2);
+        font-size: 0.88rem;
+        margin-top: 4px;
       }
 
       .progress-container {
         display: flex;
         align-items: center;
-        margin-top: 1rem;
+        gap: 0.9rem;
       }
-
       .progress-ring-wrapper {
         position: relative;
-        width: 5rem;
-        height: 5rem;
-        margin-right: 1rem;
+        width: 72px;
+        height: 72px;
       }
-
       .progress-ring {
-        width: 5rem;
-        height: 5rem;
+        width: 72px;
+        height: 72px;
         transform: rotate(-90deg);
       }
-
       .progress-ring-bg {
-        cx: 50;
-        cy: 50;
-        r: 40;
-        stroke: var(--color-gray-200);
-        stroke-width: 8;
+        stroke: #eef2f7;
+        stroke-width: 7;
         fill: none;
       }
-
       .progress-ring-fill {
-        cx: 50;
-        cy: 50;
-        r: 40;
-        stroke: var(--color-black-600);
-        stroke-width: 8;
+        stroke: var(--accent-blue);
+        stroke-width: 7;
+        stroke-linecap: round;
         fill: none;
-        stroke-dasharray: 251.2;
-        stroke-dashoffset: 125.6;
-        transition: stroke-dashoffset 0.5s ease;
+        transition: stroke-dashoffset 0.45s ease;
       }
-
       .progress-text {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        inset: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-
-      .progress-text span {
-        font-size: 1.25rem;
         font-weight: 700;
-        color: var(--color-gray-800);
+        color: #0b1220;
       }
 
-      .progress-label {
-        color: var(--color-gray-600);
+      .progress-details .progress-label {
+        color: var(--muted-2);
+        font-size: 0.9rem;
       }
-
-      .progress-percentage {
-        font-size: 1.5rem;
+      .progress-details .progress-percentage {
         font-weight: 700;
-        color: var(--color-gray-800);
+        color: #0b1220;
+        font-size: 1.05rem;
       }
 
-      /* Activities Section */
+      /* =========================
+         DAILY TIP - eye catchy
+         glowing left accent, animated bulb pulse
+         ========================= */
+      .daily-tips-card {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.85rem;
+        background: linear-gradient(180deg, #fbfdff, #fcfeff);
+        border-left: 6px solid var(--accent-blue);
+        padding: 0.9rem 1rem;
+        border-radius: 10px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* subtle moving gradient overlay for attention */
+      .daily-tips-card::after {
+        content: "";
+        position: absolute;
+        right: -40%;
+        top: -30%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          120deg,
+          rgba(31, 111, 235, 0.06),
+          rgba(102, 187, 106, 0.03),
+          rgba(245, 158, 11, 0.03)
+        );
+        transform: rotate(12deg);
+        opacity: 0.7;
+        pointer-events: none;
+      }
+
+      .tips-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, var(--accent-blue), #4aa3ff);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 12px 30px rgba(31, 111, 235, 0.12);
+        animation: bulbPulse 2.2s ease-in-out infinite;
+      }
+
+      @keyframes bulbPulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.07);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .tips-content .tip-text {
+        color: #0b1220;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+      .tip-source {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-top: 6px;
+      }
+
+      /* CTA small badge for freshness */
+      .tips-badge {
+        position: absolute;
+        top: 10px;
+        right: 12px;
+        background: #0b1220;
+        color: #fff;
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-weight: 700;
+        font-size: 12px;
+        box-shadow: 0 8px 20px rgba(2, 6, 23, 0.18);
+      }
+
+      /* =========================
+         ACTIVITIES - list, responsive
+         ========================= */
       .activities-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 1.5rem;
+        gap: 1rem;
+        flex-wrap: wrap;
       }
-
       .section-title {
-        font-size: 1.25rem;
+        font-size: 1.05rem;
+        color: #0b1220;
         font-weight: 700;
-        color: var(--color-gray-800);
+      }
+      .activities-header-right {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
       }
 
       .last-updated {
-        font-size: 0.875rem;
-        color: var(--color-gray-600);
+        color: var(--muted);
+        font-size: 0.82rem;
       }
 
-      .last-updated i {
-        margin-right: 0.25rem;
+      .mark-all-complete-btn {
+        padding: 0.5rem 0.9rem;
+        background: linear-gradient(135deg, #070707, #222426);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-weight: 800;
+        cursor: pointer;
+        box-shadow: var(--btn-shadow-soft);
+        transition: transform 0.12s ease;
       }
-
-      .activities-list {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .activity-item {
-        padding: 1rem;
-        border: 2px solid;
-        border-radius: 0.75rem;
-        transition: all 0.3s ease;
-      }
-
-      .activity-item:hover {
+      .mark-all-complete-btn:hover {
         transform: translateY(-3px);
       }
 
-      .activity-item.completed {
-        border-color: var(--color-green-200);
-        background-color: var(--color-green-50);
+      .activities-list {
+        margin-top: 0.6rem;
       }
 
-      .activity-item.pending {
-        border-color: var(--color-gray-200);
-        background-color: var(--color-white);
+      .activity-item {
+        padding: 0.9rem;
+        border-radius: 10px;
+        background: #fbfdff;
+        border: 1px solid #eef2f7;
+        margin-bottom: 0.9rem;
+        transition: box-shadow 0.12s ease, transform 0.12s ease;
+      }
+      .activity-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(2, 6, 23, 0.12);
+      }
+      .activity-item.completed {
+        background: #ecfdf5;
+        border-color: #bbf7d0;
       }
 
       .activity-content {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 1rem;
       }
-
-      .activity-icon {
-        width: 3rem;
-        height: 3rem;
-        border-radius: 0.5rem;
+      .activity-left {
         display: flex;
         align-items: center;
-        justify-content: center;
-        margin-right: 1rem;
-      }
-
-      .activity-item.completed .activity-icon {
-        background-color: var(--color-green-100);
-      }
-
-      .activity-item.completed .activity-icon i {
-        color: var(--color-green-600);
-        font-size: 1.25rem;
-      }
-
-      .activity-item.pending .activity-icon {
-        background-color: var(--color-gray-100);
-      }
-
-      .activity-item.pending .activity-icon i {
-        color: var(--color-gray-500);
-        font-size: 1.25rem;
-      }
-
-      .activity-details {
+        gap: 0.85rem;
         flex: 1;
       }
 
-      .activity-title {
-        font-weight: 700;
-        color: var(--color-gray-800);
-      }
-
-      .activity-time {
-        font-size: 0.875rem;
-        color: var(--color-gray-600);
-      }
-
-      .activity-status {
+      .activity-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
         display: flex;
         align-items: center;
+        justify-content: center;
+        background: #fff;
+        border: 1px solid #e8edf6;
+        color: var(--accent-blue);
+        flex-shrink: 0;
+      }
+
+      .activity-details .activity-title {
+        font-weight: 700;
+        color: #0b1220;
+        font-size: 0.98rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .activity-time {
+        color: var(--muted);
+        font-size: 0.82rem;
+        margin-top: 4px;
+      }
+
+      /* Mark button: reduced shadow, not sticky */
+      .mark-complete-btn {
+        padding: 0.42rem 0.78rem;
+        background: linear-gradient(135deg, #070707, #222426);
+        color: #fff;
+        border: none;
+        border-radius: 9px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 6px 12px rgba(2, 6, 23, 0.12);
+        transition: transform 0.12s ease, box-shadow 0.12s ease;
+      }
+      .mark-complete-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 18px rgba(2, 6, 23, 0.14);
       }
 
       .status-text {
-        color: var(--color-green-600);
-        font-weight: 500;
-        margin-right: 0.75rem;
+        color: var(--success);
+        font-weight: 700;
+        margin-right: 0.5rem;
       }
-
       .status-icon {
-        width: 2.5rem;
-        height: 2.5rem;
-        background: var(--color-green-500);
+        width: 36px;
+        height: 36px;
+        background: var(--success);
+        color: #fff;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
       }
 
-      .status-icon i {
-        color: var(--color-white);
-      }
-
-      .mark-complete-btn {
-        padding: 0.5rem 1rem;
-        background: var(--color-black-600);
-        color: var(--color-white);
-        border: none;
-        border-radius: 0.5rem;
-        font-weight: 500;
+      .dropdown-icon {
+        color: var(--muted);
+        font-size: 14px;
         cursor: pointer;
-        transition: all 0.3s;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       }
 
-      .mark-complete-btn:hover {
-        background: var(--color-black-500);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.15);
+      .activity-expanded-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.28s ease;
+        margin-top: 0;
+      }
+      .activity-item.expanded .activity-expanded-content {
+        max-height: 600px;
+        margin-top: 0.75rem;
       }
 
-      .health-subtitle {
-        color: var(--color-gray-600);
-        margin-bottom: 1rem;
+      .activity-description {
+        color: #071025;
+        font-size: 0.92rem;
+        line-height: 1.45;
+        margin-bottom: 0.75rem;
+      }
+      /* Slightly darker description color for readability (#071025) */
+
+      .benefits-title {
+        font-weight: 700;
+        color: #0b1220;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+      .benefits-list li {
+        display: flex;
+        gap: 0.6rem;
+        color: var(--muted-2);
+        font-size: 0.88rem;
+        padding: 0.35rem 0;
       }
 
+      /* =========================
+         HEALTH SECTION
+         ========================= */
+      .health-card .health-subtitle {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-bottom: 0.75rem;
+      }
       .health-options {
         display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        margin-bottom: 1rem;
+        gap: 0.85rem;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       }
-
       .health-option {
-        border: 2px solid var(--color-gray-200);
-        border-radius: 0.75rem;
-        padding: 1rem;
+        border: 1px solid #eef2f7;
+        background: #fbfdff;
+        padding: 0.9rem;
+        border-radius: 10px;
         text-align: center;
         cursor: pointer;
-        transition: all 0.3s;
+        transition: transform 0.12s ease, background 0.12s ease;
       }
-
       .health-option:hover {
-        border-color: var(--color-black-600);
-        transform: translateY(-2px);
+        transform: translateY(-3px);
       }
-
+      .health-option.selected {
+        background: #0b1220;
+        color: #fff;
+        border-color: #000;
+      }
       .health-icon {
-        width: 3rem;
-        height: 3rem;
-        border-radius: 50%;
+        width: 48px;
+        height: 48px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 0.5rem;
+        border-radius: 10px;
+        margin: 0 auto 0.5rem auto;
+        background: #fff;
+        border: 1px solid #eef2f7;
+        color: var(--muted);
+      }
+      .submit-health-btn {
+        margin-top: 0.75rem;
+        width: 100%;
+        padding: 0.78rem;
+        background: linear-gradient(135deg, #070707, #222426);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-weight: 800;
+        cursor: pointer;
+        box-shadow: var(--btn-shadow-soft);
+      }
+      .submit-health-btn:disabled {
+        background: #eef2f7;
+        color: var(--muted);
+        cursor: not-allowed;
+        box-shadow: none;
       }
 
-      .health-icon.excellent {
-        background-color: var(--color-green-100);
+      /* =========================
+         FINAL THANK YOU
+         - removed Continue, added Logout (functional)
+         ========================= */
+      .final-thank-you-page {
+        text-align: center;
+        padding: 2rem;
       }
-
-      .health-icon.excellent i {
-        color: var(--color-green-600);
-        font-size: 1.25rem;
+      .final-thank-you-icon {
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-blue), #4aa3ff);
+        margin: 0 auto 1rem auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        box-shadow: 0 12px 30px rgba(31, 111, 235, 0.18);
       }
-
-      .health-icon.good {
-        background-color: var(--color-blue-100);
+      .final-thank-you-title {
+        color: #0b1220;
+        font-weight: 800;
+        font-size: 1.6rem;
       }
-
-      .health-icon.good i {
-        color: var(--color-blue-600);
-        font-size: 1.25rem;
+      .final-thank-you-message {
+        color: var(--muted);
+        margin-top: 0.6rem;
+        line-height: 1.5;
       }
-
-      .health-icon.fair {
-        background-color: var(--color-yellow-100);
-      }
-
-      .health-icon.fair i {
-        color: var(--color-yellow-600);
-        font-size: 1.25rem;
-      }
-
-      .health-icon.not-well {
-        background-color: var(--color-red-100);
-      }
-
-      .health-icon.not-well i {
-        color: var(--color-red-600);
-        font-size: 1.25rem;
-      }
-
-      .health-label {
-        font-weight: 500;
-        color: var(--color-gray-800);
-      }
-
-      .health-notes {
+      .completion-actions {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
         margin-top: 1rem;
       }
-
-      .notes-label {
-        display: block;
-        color: var(--color-gray-700);
-        margin-bottom: 0.5rem;
+      .completion-btn {
+        padding: 0.7rem 1.1rem;
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+        border: none;
+      }
+      .completion-btn.primary {
+        background: linear-gradient(135deg, #070707, #222426);
+        color: #fff;
+      }
+      .completion-btn.secondary {
+        background: #fbfdff;
+        color: #0b1220;
+        border: 1px solid #eef2f7;
       }
 
-      .notes-textarea {
-        width: 100%;
-        padding: 0.75rem 1rem;
-        border: 1px solid var(--color-gray-300);
-        border-radius: 0.5rem;
-        font-family: "Poppins", sans-serif;
-        resize: vertical;
-        min-height: 5rem;
-      }
-
-      .notes-textarea:focus {
-        outline: none;
-        border-color: var(--color-black-600);
-        box-shadow: 0 0 0 2px rgba(42, 44, 42, 0.2);
-      }
-
-      .week-days {
-        display: flex;
-        justify-content: space-between;
-        text-align: center;
-      }
-
-      .day-name {
-        color: var(--color-gray-600);
-        font-size: 0.875rem;
-      }
-
-      .day-status {
-        width: 2.5rem;
-        height: 2.5rem;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0.5rem auto 0;
-      }
-
-      .day-status.completed {
-        background: var(--color-green-500);
-      }
-
-      .day-status.completed i {
-        color: var(--color-white);
-        font-size: 0.875rem;
-      }
-
-      .day-status.in-progress {
-        background: var(--color-green-100);
-      }
-
-      .day-status.in-progress span {
-        color: var(--color-gray-600);
-        font-weight: 500;
-      }
-
-      .day-status.pending {
-        background: var(--color-gray-200);
-      }
-
-      .day-status.pending span {
-        color: var(--color-gray-500);
-        font-size: 0.875rem;
-      }
-
+      /* =========================
+         FOOTER
+         ========================= */
       .footer {
-        margin-top: 2rem;
+        margin-top: 1.75rem;
         text-align: center;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.03);
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 0.82rem;
+      }
+      .footer strong {
+        color: #fff;
       }
 
-      .footer-text {
-        color: var(--color-white);
-        font-size: 0.875rem;
-      }
-      .footer-text > a {
-        text-decoration: none;
-        color: var(--color-blue-600);
-      }
-
+      /* =========================
+         NOTIFICATION
+         ========================= */
       .notification {
         position: fixed;
         bottom: 1rem;
         right: 1rem;
-        background: var(--color-green-500);
-        color: var(--color-white);
-        padding: 1rem;
-        border-radius: 0.5rem;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-          0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        transform: translateY(4rem);
-        transition: transform 0.3s;
+        background: linear-gradient(135deg, #070707, #222426);
+        color: #fff;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        font-size: 0.9rem;
         display: none;
+        z-index: 1200;
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
       }
-
       .notification.show {
-        transform: translateY(0);
         display: block;
+        animation: toastIn 0.28s ease;
+      }
+      @keyframes toastIn {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
-      .notification-content {
-        display: flex;
-        align-items: center;
-      }
-
-      .notification-content i {
-        margin-right: 0.5rem;
-      }
-
-      /* Responsive Design */
-      @media (min-width: 768px) {
-        .date-progress-content {
-          flex-direction: row;
+      /* =========================
+         Responsive tweaks
+         ========================= */
+      @media (max-width: 640px) {
+        .header {
+          padding: 0.85rem;
         }
-
-        .progress-container {
-          margin-top: 0;
+        .logo-title {
+          font-size: 1.02rem;
         }
-
-        .health-options {
-          grid-template-columns: repeat(4, 1fr);
+        .user-details {
+          text-align: left;
+          min-width: 0;
         }
-
-        .activity-content {
-          justify-content: flex-start;
+        .reset-day-btn {
+          padding: 0.42rem 0.6rem;
+        }
+        .progress-ring-wrapper {
+          width: 56px;
+          height: 56px;
+        }
+        .progress-ring {
+          width: 56px;
+          height: 56px;
+        }
+        .activity-icon {
+          width: 40px;
+          height: 40px;
+        }
+        .activity-details .activity-title {
+          font-size: 0.92rem;
+        }
+        .container {
+          width: 96%;
+          padding: 0 0.6rem;
         }
       }
     </style>
   </head>
+
   <body>
     <div class="container">
       <header class="header">
         <div class="logo-container">
-          <div class="logo-icon">
-            <i class="fas fa-spa"></i>
-          </div>
+          <div class="logo-icon"><i class="fas fa-spa"></i></div>
           <div>
             <h1 class="logo-title">PRANA</h1>
             <p class="logo-subtitle">Student Dashboard</p>
           </div>
         </div>
+
         <div class="user-info">
           <div class="user-details">
             <p class="user-name" id="studentName">Akansha Rana</p>
             <p class="user-id" id="studentId">Scholar ID: 23144003</p>
           </div>
-          <div class="avatar-container">
-            <div class="avatar">
-              <i class="fas fa-user"></i>
-            </div>
-            <div class="online-indicator"></div>
+
+          <div class="streak-container">
+            <div class="streak-circle"><i class="fas fa-fire"></i></div>
+            <div class="streak-count" id="streakCount">0</div>
           </div>
+
+          <button class="reset-day-btn" onclick="manualReset()">
+            <i class="fas fa-redo"></i> Reset Day
+          </button>
+          <a
+            href="contact.html"
+            class="reset-day-btn"
+            style="background: #0b0b0b; color: #fff"
+          >
+            <i class="fas fa-envelope"></i> Contact
+          </a>
         </div>
       </header>
 
-      <div class="card date-progress-card">
-        <div class="date-progress-content">
-          <div class="date-info">
-            <h2 class="current-date" id="currentDate">
-              Thursday, October 16, 2025
-            </h2>
-            <p class="date-subtitle">
-              Complete your daily activities to maintain your discipline record
-            </p>
-          </div>
-          <div class="progress-container">
-            <div class="progress-ring-wrapper">
-              <svg class="progress-ring" viewBox="0 0 100 100">
-                <circle
-                  class="progress-ring-bg"
-                  cx="50"
-                  cy="50"
-                  r="40"
-                ></circle>
-                <circle
-                  class="progress-ring-fill"
-                  cx="50"
-                  cy="50"
-                  r="40"
-                ></circle>
-              </svg>
-              <div class="progress-text">
-                <span>2/5</span>
-              </div>
-            </div>
-            <div class="progress-details">
-              <p class="progress-label">Today's Progress</p>
-              <p class="progress-percentage">40%</p>
-            </div>
-          </div>
+      <!-- Final Thank You Page (Hidden by default) -->
+      <div
+        class="card final-thank-you-page"
+        id="finalThankYouPage"
+        style="display: none"
+      >
+        <div class="final-thank-you-icon">
+          <i class="fas fa-trophy"></i>
         </div>
-      </div>
-
-      <div class="card activities-card">
-        <div class="activities-header">
-          <h3 class="section-title">Daily Activities</h3>
-          <div class="last-updated">
-            <i class="far fa-clock"></i>
-            <span id="lastUpdated">Last updated: 09:45 AM</span>
-          </div>
-        </div>
-
-        <div class="activities-list" id="activitiesList">
-          <!-- Activity 1 -->
-          <div class="activity-item completed">
-            <div class="activity-content">
-              <div class="activity-icon">
-                <i class="fas fa-pray"></i>
-              </div>
-              <div class="activity-details">
-                <h4 class="activity-title">Morning Prayer</h4>
-                <p class="activity-time">5:00 AM - 5:30 AM</p>
-              </div>
-            </div>
-            <div class="activity-status">
-              <span class="status-text">Completed</span>
-              <div class="status-icon">
-                <i class="fas fa-check"></i>
-              </div>
-            </div>
-          </div>
-
-          <!-- Activity 2 -->
-          <div class="activity-item completed">
-            <div class="activity-content">
-              <div class="activity-icon">
-                <i class="fas fa-spa"></i>
-              </div>
-              <div class="activity-details">
-                <h4 class="activity-title">Yoga</h4>
-                <p class="activity-time">5:30 AM - 6:00 AM</p>
-              </div>
-            </div>
-            <div class="activity-status">
-              <span class="status-text">Completed</span>
-              <div class="status-icon">
-                <i class="fas fa-check"></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="activity-item completed">
-            <div class="activity-content">
-              <div class="activity-icon">
-                <i class="fas fa-spa"></i>
-              </div>
-              <div class="activity-details">
-                <h4 class="activity-title">Yagya</h4>
-                <p class="activity-time">6:00 AM - 7:00 AM</p>
-              </div>
-            </div>
-            <div class="activity-status">
-              <span class="status-text">Completed</span>
-              <div class="status-icon">
-                <i class="fas fa-check"></i>
-              </div>
-            </div>
-          </div>
-
-          <!-- Activity 3 -->
-          <div class="activity-item pending">
-            <div class="activity-content">
-              <div class="activity-icon">
-                <i class="fa-solid fa-broom"></i>
-              </div>
-              <div class="activity-details">
-                <h4 class="activity-title">Shramdaan</h4>
-                <p class="activity-time">4:00 PM - 5:00 PM</p>
-              </div>
-            </div>
-            <button class="mark-complete-btn">Mark Complete</button>
-          </div>
-
-          <!-- Activity 4 -->
-          <div class="activity-item pending">
-            <div class="activity-content">
-              <div class="activity-icon">
-                <i class="fas fa-brain"></i>
-              </div>
-              <div class="activity-details">
-                <h4 class="activity-title">Naad Yog</h4>
-                <p class="activity-time">6:00 PM - 6:15 PM</p>
-              </div>
-            </div>
-            <button class="mark-complete-btn">Mark Complete</button>
-          </div>
-
-          <!-- Activity 5 -->
-          <div class="activity-item pending">
-            <div class="activity-content">
-              <div class="activity-icon">
-                <i class="fas fa-hands-praying"></i>
-              </div>
-              <div class="activity-details">
-                <h4 class="activity-title">Evening Prayer</h4>
-                <p class="activity-time">8:00 PM - 8:30 PM</p>
-              </div>
-            </div>
-            <button class="mark-complete-btn">Mark Complete</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="card health-card">
-        <h3 class="section-title">Health Status</h3>
-        <p class="health-subtitle">How are you feeling today?</p>
-
-        <div class="health-options">
-          <div class="health-option">
-            <div class="health-icon excellent">
-              <i class="fas fa-laugh-beam"></i>
-            </div>
-            <p class="health-label">Excellent</p>
-          </div>
-          <div class="health-option">
-            <div class="health-icon good">
-              <i class="fas fa-smile"></i>
-            </div>
-            <p class="health-label">Good</p>
-          </div>
-          <div class="health-option">
-            <div class="health-icon fair">
-              <i class="fas fa-meh"></i>
-            </div>
-            <p class="health-label">Fair</p>
-          </div>
-          <div class="health-option">
-            <div class="health-icon not-well">
-              <i class="fas fa-frown"></i>
-            </div>
-            <p class="health-label">Not Well</p>
-          </div>
-        </div>
-
-        <!-- <div class="health-notes">
-          <label for="healthNotes" class="notes-label"
-            >Additional Notes (Optional)</label
-          >
-          <textarea
-            id="healthNotes"
-            class="notes-textarea"
-            placeholder="Any specific health concerns or notes..."
-          ></textarea>
-        </div> -->
-      </div>
-
-      <!-- Weekly Progress -->
-      <!-- <div class="card weekly-progress-card">
-        <h3 class="section-title">Weekly Progress</h3>
-        <div class="week-days">
-          <div class="day">
-            <p class="day-name">Mon</p>
-            <div class="day-status completed">
-              <i class="fas fa-check"></i>
-            </div>
-          </div>
-          <div class="day">
-            <p class="day-name">Tue</p>
-            <div class="day-status completed">
-              <i class="fas fa-check"></i>
-            </div>
-          </div>
-          <div class="day">
-            <p class="day-name">Wed</p>
-            <div class="day-status in-progress">
-              <span>2/5</span>
-            </div>
-          </div>
-          <div class="day">
-            <p class="day-name">Thu</p>
-            <div class="day-status pending">
-              <span>-</span>
-            </div>
-          </div>
-          <div class="day">
-            <p class="day-name">Fri</p>
-            <div class="day-status pending">
-              <span>-</span>
-            </div>
-          </div>
-          <div class="day">
-            <p class="day-name">Sat</p>
-            <div class="day-status pending">
-              <span>-</span>
-            </div>
-          </div>
-          <div class="day">
-            <p class="day-name">Sun</p>
-            <div class="day-status pending">
-              <span>-</span>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
-      <!-- Footer -->
-      <footer class="footer">
-        <p class="footer-text">
-          PRANA - Productivity & Routine Activity Noting Application
+        <h2 class="final-thank-you-title">Amazing Job!</h2>
+        <p class="final-thank-you-message" id="completionMessage">
+          You have successfully completed your daily activities and submitted
+          your health check for today. Your dedication matters — keep building
+          this habit.
         </p>
-        <p class="footer-text"><a href="contact.html">Contact Us</a></p>
-      </footer>
+        <div class="completion-actions">
+          <button class="completion-btn primary" id="shareAchievementBtn">
+            <i class="fas fa-share-alt"></i> Share Achievement
+          </button>
+          <!-- Logout button (functional): clears localStorage and redirects to login -->
+          <button class="completion-btn secondary" id="logoutBtn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </div>
+
+      <!-- Main Dashboard Content -->
+      <div id="mainDashboard">
+        <div class="card date-progress-card animate-in">
+          <div class="date-progress-content">
+            <div class="date-info">
+              <h2 class="current-date" id="currentDate">Loading...</h2>
+              <p class="date-subtitle">
+                Complete your daily activities to maintain your discipline
+                record
+              </p>
+            </div>
+
+            <div class="progress-container">
+              <div class="progress-ring-wrapper" aria-hidden="true">
+                <svg
+                  class="progress-ring"
+                  viewBox="0 0 100 100"
+                  width="72"
+                  height="72"
+                >
+                  <circle
+                    class="progress-ring-bg"
+                    cx="50"
+                    cy="50"
+                    r="35"
+                  ></circle>
+                  <circle
+                    class="progress-ring-fill"
+                    cx="50"
+                    cy="50"
+                    r="35"
+                    stroke-dasharray="219.8"
+                    stroke-dashoffset="219.8"
+                  ></circle>
+                </svg>
+                <div class="progress-text"><span>0/6</span></div>
+              </div>
+
+              <div class="progress-details">
+                <p class="progress-label">Today's Progress</p>
+                <p class="progress-percentage">0%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Compact Daily Tips Card -->
+        <div class="card daily-tips-card animate-in">
+          <div class="tips-icon"><i class="fas fa-lightbulb"></i></div>
+          <div class="tips-content">
+            <p class="tip-text" id="dailyTip">Loading tip for today...</p>
+            <p class="tip-source" id="tipSource"></p>
+          </div>
+          <div class="tips-badge">Tip</div>
+        </div>
+
+        <div class="card activities-card animate-in">
+          <div class="activities-header">
+            <h3 class="section-title">Daily Activities</h3>
+            <div class="activities-header-right">
+              <button class="mark-all-complete-btn" id="markAllCompleteBtn">
+                <i class="fas fa-check-double"></i> Mark All Complete
+              </button>
+              <div class="last-updated">
+                <i class="far fa-clock"></i>
+                <span id="lastUpdated">Last updated: Loading...</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="activities-list" id="activitiesList">
+            <!-- Activities will be loaded dynamically -->
+          </div>
+        </div>
+
+        <div class="card health-card animate-in">
+          <h3 class="section-title">Health Status</h3>
+          <p class="health-subtitle">How are you feeling today?</p>
+
+          <div class="health-options">
+            <div class="health-option" data-status="excellent">
+              <div class="health-icon"><i class="fas fa-laugh-beam"></i></div>
+              <p class="health-label">Excellent</p>
+            </div>
+            <div class="health-option" data-status="good">
+              <div class="health-icon"><i class="fas fa-smile"></i></div>
+              <p class="health-label">Good</p>
+            </div>
+            <div class="health-option" data-status="fair">
+              <div class="health-icon"><i class="fas fa-meh"></i></div>
+              <p class="health-label">Fair</p>
+            </div>
+            <div class="health-option" data-status="not-well">
+              <div class="health-icon"><i class="fas fa-frown"></i></div>
+              <p class="health-label">Not Well</p>
+            </div>
+          </div>
+
+          <button class="submit-health-btn" id="submitHealthBtn" disabled>
+            Submit Health Status
+          </button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <p class="footer-text">
+            PRANA - Productivity & Routine Activity Noting Application<br /><strong
+              >Made with passion by Akansha Rana</strong
+            >
+          </p>
+        </footer>
+      </div>
     </div>
 
     <!-- Success Notification -->
     <div id="successNotification" class="notification">
       <div class="notification-content">
-        <i class="fas fa-check-circle"></i>
-        <span>Activity marked as completed!</span>
+        <i class="fas fa-check-circle" style="margin-right: 8px"></i>
+        <span id="notificationMessage"></span>
       </div>
     </div>
 
     <script>
-      // Simple authentication check
+      document.getElementById("logoutBtn").addEventListener("click", () => {
+        localStorage.removeItem("student");
+        window.location.href = "index.html";
+      });
+
+      // Prevent back navigation to login page
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+        history.go(1);
+      };
+
+      // Run on DOM ready
       document.addEventListener("DOMContentLoaded", function () {
         const student = localStorage.getItem("student");
         console.log("Student auth check:", student);
@@ -915,12 +1007,18 @@
 
         // If logged in, load the dashboard
         initStudentDashboard();
+
+        // animate cards in a staggered manner
+        const cards = document.querySelectorAll(".card.animate-in");
+        cards.forEach((c, i) => {
+          setTimeout(() => c.classList.add("visible"), 120 + i * 80);
+        });
       });
 
-      const API_URL = "http://localhost:3000";
       let currentStudent = null;
+      let selectedHealthStatus = null;
 
-      async function initStudentDashboard() {
+      function initStudentDashboard() {
         currentStudent = JSON.parse(localStorage.getItem("student"));
 
         // Update student info
@@ -938,131 +1036,503 @@
         setupHealthOptions();
         updateLastUpdatedTime();
         setupMarkCompleteButtons();
+        setupMarkAllCompleteButton();
+        loadActivities();
         updateProgress();
+        updateStreak();
+        showDailyTip();
+
+        // setup completion page buttons (share + logout)
+        setupCompletionButtons();
+      }
+
+      function loadActivities() {
+        const activities = [
+          {
+            id: 1,
+            name: "Morning Prayer",
+            time: "5:00 AM - 5:30 AM",
+            completed: false,
+            description:
+              "Begin with quiet gratitude. Five focused minutes of prayer or reflection sharpens the mind and sets a calm, purposeful tone for your whole day.",
+            benefits: [
+              "Sharpened focus and calm",
+              "Reduced morning anxiety",
+              "Clear mental intentions",
+              "Improved emotional balance",
+              "Stronger daily routine",
+            ],
+          },
+          {
+            id: 2,
+            name: "Yoga",
+            time: "5:30 AM - 6:00 AM",
+            completed: false,
+            description:
+              "Wake the body gently: simple stretches and mindful breathing energize you, ease stiffness, and help you study longer with clarity.",
+            benefits: [
+              "Better posture & flexibility",
+              "Boosted circulation & energy",
+              "Reduced physical tension",
+              "Sharper mind-body connection",
+              "Calmer sleep later",
+            ],
+          },
+          {
+            id: 3,
+            name: "Yagya",
+            time: "6:00 AM - 7:00 AM",
+            completed: false,
+            description:
+              "A traditional ritual to refresh the atmosphere and focus the mind — participate to feel connected, centered, and renewed.",
+            benefits: [
+              "Purified environment",
+              "Improved focus",
+              "Positive energy boost",
+              "Mindful breathing benefits",
+              "Community connection",
+            ],
+          },
+          {
+            id: 4,
+            name: "Shramdaan",
+            time: "4:00 PM - 5:00 PM",
+            completed: false,
+            description:
+              "Contribute a hand to your community. Small acts of service build pride, leadership, and real-life problem solving skills.",
+            benefits: [
+              "Stronger teamwork",
+              "Community pride",
+              "Light physical activity",
+              "Responsibility growth",
+              "Visible impact",
+            ],
+          },
+          {
+            id: 5,
+            name: "Naad Yog",
+            time: "6:00 PM - 6:15 PM",
+            completed: false,
+            description:
+              "Short sonic practice to release stress: simple vocal exercises and breath patterns that calm the nervous system in under 10 minutes.",
+            benefits: [
+              "Quick stress relief",
+              "Improved breathing",
+              "Balanced energy",
+              "Voice & focus benefits",
+              "Instant calm",
+            ],
+          },
+          {
+            id: 6,
+            name: "Evening Prayer",
+            time: "8:00 PM - 8:30 PM",
+            completed: false,
+            description:
+              "Reflect and close your day with gratitude; it reduces anxiety, improves sleep and makes tomorrow more productive.",
+            benefits: [
+              "Better sleep readiness",
+              "Emotional processing",
+              "Gratitude building",
+              "Evening calm",
+              "Improved routine closure",
+            ],
+          },
+        ];
+
+        // Load completed activities from localStorage and validate them
+        let completedActivities =
+          JSON.parse(localStorage.getItem("completedActivities")) || [];
+
+        // Validate and clean completed activities array
+        completedActivities = completedActivities
+          .filter((id) => Number.isInteger(id) && id >= 1 && id <= 6)
+          .filter((id, index, array) => array.indexOf(id) === index)
+          .sort((a, b) => a - b);
+
+        // Save cleaned array back to localStorage
+        localStorage.setItem(
+          "completedActivities",
+          JSON.stringify(completedActivities)
+        );
+
+        // Mark activities as completed based on the cleaned localStorage
+        activities.forEach((activity) => {
+          activity.completed = completedActivities.includes(activity.id);
+        });
+
+        renderActivities(activities);
+      }
+
+      function renderActivities(activities) {
+        const activitiesList = document.getElementById("activitiesList");
+        activitiesList.innerHTML = "";
+
+        activities.forEach((activity) => {
+          const activityItem = document.createElement("div");
+          activityItem.className = `activity-item ${
+            activity.completed ? "completed" : "pending"
+          }`;
+          activityItem.setAttribute("data-activity-id", activity.id);
+
+          const iconClass = getActivityIcon(activity.name);
+
+          activityItem.innerHTML = `
+            <div class="activity-content">
+              <div class="activity-left">
+                <div class="activity-icon">
+                  <i class="${iconClass}"></i>
+                </div>
+                <div class="activity-details">
+                  <h4 class="activity-title">
+                    ${activity.name}
+                    <i class="fas fa-chevron-down dropdown-icon" data-activity-id="${
+                      activity.id
+                    }"></i>
+                  </h4>
+                  <p class="activity-time">${activity.time}</p>
+                </div>
+              </div>
+              ${
+                activity.completed
+                  ? `
+                <div class="activity-status">
+                  <span class="status-text">Completed</span>
+                  <div class="status-icon">
+                    <i class="fas fa-check"></i>
+                  </div>
+                </div>
+              `
+                  : `
+                <button class="mark-complete-btn" data-activity-id="${activity.id}">
+                  Mark Complete
+                </button>
+              `
+              }
+            </div>
+            <div class="activity-expanded-content">
+              <p class="activity-description">${activity.description}</p>
+              <h4 class="benefits-title"><i class="fas fa-star"></i> Key Benefits</h4>
+              <ul class="benefits-list">
+                ${activity.benefits
+                  .map(
+                    (benefit) =>
+                      `<li><i class="fas fa-check" style="color:var(--success);"></i> ${benefit}</li>`
+                  )
+                  .join("")}
+              </ul>
+            </div>
+          `;
+          activitiesList.appendChild(activityItem);
+        });
+
+        // Add click event to dropdown icons for expanding/collapsing
+        document.querySelectorAll(".dropdown-icon").forEach((icon) => {
+          icon.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const activityId = parseInt(this.getAttribute("data-activity-id"));
+            const activityItem = this.closest(".activity-item");
+            const isExpanded = activityItem.classList.contains("expanded");
+
+            // Close all other expanded items
+            document
+              .querySelectorAll(".activity-item.expanded")
+              .forEach((expandedItem) => {
+                if (expandedItem !== activityItem)
+                  expandedItem.classList.remove("expanded");
+              });
+
+            // Toggle current item
+            activityItem.classList.toggle("expanded", !isExpanded);
+          });
+        });
+
+        // Also allow clicking anywhere on the activity item to expand (except buttons)
+        document.querySelectorAll(".activity-item").forEach((item) => {
+          item.addEventListener("click", function (e) {
+            // Don't expand if clicking the mark complete button
+            if (
+              e.target.classList.contains("mark-complete-btn") ||
+              e.target.closest(".mark-complete-btn")
+            )
+              return;
+
+            const activityId = parseInt(this.getAttribute("data-activity-id"));
+            const isExpanded = this.classList.contains("expanded");
+
+            // Close all other expanded items
+            document
+              .querySelectorAll(".activity-item.expanded")
+              .forEach((expandedItem) => {
+                if (expandedItem !== this)
+                  expandedItem.classList.remove("expanded");
+              });
+
+            // Toggle current item
+            this.classList.toggle("expanded", !isExpanded);
+          });
+        });
+      }
+
+      function getActivityIcon(activityName) {
+        const icons = {
+          "Morning Prayer": "fas fa-pray",
+          Yoga: "fas fa-spa",
+          Yagya: "fas fa-fire",
+          Shramdaan: "fa-solid fa-broom",
+          "Naad Yog": "fas fa-brain",
+          "Evening Prayer": "fas fa-hands-praying",
+        };
+        return icons[activityName] || "fas fa-tasks";
       }
 
       function checkAndResetActivities() {
         const today = new Date().toDateString();
         const lastResetDate = localStorage.getItem("lastResetDate");
 
-        console.log("Today:", today);
-        console.log("Last reset date:", lastResetDate);
-
         // Reset if it's a new day or first time
         if (!lastResetDate || lastResetDate !== today) {
-          console.log("New day detected - resetting all activities to pending");
-          resetAllActivities();
+          // Check if yesterday was completed to maintain streak
+          const yesterday = new Date();
+          yesterday.setDate(yesterday.getDate() - 1);
+          const yesterdayString = yesterday.toDateString();
+
+          // If yesterday was completed, increment streak
+          if (lastResetDate === yesterdayString) {
+            updateStreak(true);
+          } else if (lastResetDate && lastResetDate !== yesterdayString) {
+            // If missed a day, reset streak
+            updateStreak(false);
+          }
+
+          localStorage.removeItem("completedActivities");
+          localStorage.removeItem("healthStatus");
           localStorage.setItem("lastResetDate", today);
+
+          // Hide completion pages if shown
+          document.getElementById("finalThankYouPage").style.display = "none";
+          document.getElementById("mainDashboard").style.display = "block";
 
           // Show notification about reset
           setTimeout(() => {
-            showResetNotification();
-          }, 1000);
-        } else {
-          console.log("Same day - activities already reset today");
+            showNotification("Activities reset for new day! Start fresh.");
+          }, 700);
         }
-      }
-
-      function resetAllActivities() {
-        const activitiesList = document.getElementById("activitiesList");
-        const activityItems = activitiesList.querySelectorAll(".activity-item");
-
-        activityItems.forEach((activity) => {
-          // Reset to pending state
-          activity.classList.remove("completed");
-          activity.classList.add("pending");
-
-          // Remove any existing status and add Mark Complete button
-          const statusSection = activity.querySelector(".activity-status");
-          const existingButton = activity.querySelector(".mark-complete-btn");
-
-          if (statusSection) {
-            // Replace status with button
-            const button = document.createElement("button");
-            button.className = "mark-complete-btn";
-            button.textContent = "Mark Complete";
-            statusSection.replaceWith(button);
-          } else if (!existingButton) {
-            // Add button if it doesn't exist
-            const button = document.createElement("button");
-            button.className = "mark-complete-btn";
-            button.textContent = "Mark Complete";
-            activity.appendChild(button);
-          }
-        });
-
-        // Reset health status
-        document.querySelectorAll(".health-option").forEach((opt) => {
-          opt.style.borderColor = "var(--color-gray-200)";
-          opt.style.backgroundColor = "";
-        });
-
-        console.log("All activities reset to pending for new day");
-      }
-
-      function showResetNotification() {
-        const notification = document.getElementById("successNotification");
-        const notificationContent = notification.querySelector(
-          ".notification-content"
-        );
-
-        notificationContent.innerHTML = `
-      <i class="fas fa-sync-alt"></i>
-      <span>Activities reset for new day! Start fresh.</span>
-    `;
-
-        notification.classList.add("show");
-
-        setTimeout(() => {
-          notification.classList.remove("show");
-        }, 4000);
       }
 
       function setupMarkCompleteButtons() {
         document.addEventListener("click", function (e) {
           if (e.target.classList.contains("mark-complete-btn")) {
-            const activityItem = e.target.closest(".activity-item");
-
-            // Update the UI immediately
-            activityItem.classList.remove("pending");
-            activityItem.classList.add("completed");
-
-            // Create the completed status HTML
-            const statusHTML = `
-          <div class="activity-status">
-            <span class="status-text">Completed</span>
-            <div class="status-icon">
-              <i class="fas fa-check"></i>
-            </div>
-          </div>
-        `;
-
-            // Replace the button with the status HTML
-            e.target.outerHTML = statusHTML;
-
-            // Update progress
-            updateProgress();
-            showNotification("Activity marked as completed!");
+            const activityId = parseInt(
+              e.target.getAttribute("data-activity-id")
+            );
+            markActivityAsCompleted(activityId);
           }
         });
       }
 
+      function setupMarkAllCompleteButton() {
+        const markAllBtn = document.getElementById("markAllCompleteBtn");
+        if (markAllBtn) {
+          markAllBtn.addEventListener("click", markAllActivitiesAsCompleted);
+        }
+      }
+
+      function markAllActivitiesAsCompleted() {
+        let completedActivities =
+          JSON.parse(localStorage.getItem("completedActivities")) || [];
+
+        completedActivities = completedActivities
+          .filter((id) => Number.isInteger(id) && id >= 1 && id <= 6)
+          .filter((id, index, array) => array.indexOf(id) === index)
+          .sort((a, b) => a - b);
+
+        for (let i = 1; i <= 6; i++) {
+          if (!completedActivities.includes(i)) completedActivities.push(i);
+        }
+
+        completedActivities.sort((a, b) => a - b);
+
+        localStorage.setItem(
+          "completedActivities",
+          JSON.stringify(completedActivities)
+        );
+
+        loadActivities();
+        updateProgress();
+        showNotification("All activities marked as completed!");
+      }
+
+      function markActivityAsCompleted(activityId) {
+        let completedActivities =
+          JSON.parse(localStorage.getItem("completedActivities")) || [];
+
+        completedActivities = completedActivities
+          .filter((id) => Number.isInteger(id) && id >= 1 && id <= 6)
+          .filter((id, index, array) => array.indexOf(id) === index)
+          .sort((a, b) => a - b);
+
+        if (
+          Number.isInteger(activityId) &&
+          activityId >= 1 &&
+          activityId <= 6 &&
+          !completedActivities.includes(activityId)
+        ) {
+          completedActivities.push(activityId);
+          completedActivities.sort((a, b) => a - b);
+
+          localStorage.setItem(
+            "completedActivities",
+            JSON.stringify(completedActivities)
+          );
+        }
+
+        loadActivities();
+        updateProgress();
+
+        const activities = [
+          { id: 1, name: "Morning Prayer" },
+          { id: 2, name: "Yoga" },
+          { id: 3, name: "Yagya" },
+          { id: 4, name: "Shramdaan" },
+          { id: 5, name: "Naad Yog" },
+          { id: 6, name: "Evening Prayer" },
+        ];
+
+        const activity = activities.find((a) => a.id === activityId);
+        if (activity) showNotification(`${activity.name} marked as completed!`);
+      }
+
       function setupHealthOptions() {
-        document.querySelectorAll(".health-option").forEach((option) => {
+        const healthOptions = document.querySelectorAll(".health-option");
+        const submitBtn = document.getElementById("submitHealthBtn");
+
+        // Load previously selected health status if any
+        const savedHealthStatus = localStorage.getItem("healthStatus");
+        if (savedHealthStatus) {
+          healthOptions.forEach((option) => {
+            if (option.getAttribute("data-status") === savedHealthStatus) {
+              option.classList.add("selected");
+              selectedHealthStatus = savedHealthStatus;
+              submitBtn.disabled = false;
+            }
+          });
+        }
+
+        healthOptions.forEach((option) => {
           option.addEventListener("click", function () {
-            const healthLabel = this.querySelector(".health-label").textContent;
+            // Remove selected class from all options
+            healthOptions.forEach((opt) => opt.classList.remove("selected"));
 
-            document.querySelectorAll(".health-option").forEach((opt) => {
-              opt.style.borderColor = "var(--color-gray-200)";
-              opt.style.backgroundColor = "";
-            });
-            this.style.borderColor = "var(--color-black-600)";
-            this.style.backgroundColor = "var(--color-black-100)";
+            // Add selected class to clicked option
+            this.classList.add("selected");
 
-            // Show confirmation
-            showNotification(`Health status set to: ${healthLabel}`);
+            // Store selected status
+            selectedHealthStatus = this.getAttribute("data-status");
+
+            // Enable submit button
+            submitBtn.disabled = false;
           });
         });
+
+        // Handle health status submission
+        submitBtn.addEventListener("click", function () {
+          if (selectedHealthStatus) submitHealthStatus(selectedHealthStatus);
+        });
+      }
+
+      function submitHealthStatus(status) {
+        localStorage.setItem("healthStatus", status);
+
+        let completedActivities =
+          JSON.parse(localStorage.getItem("completedActivities")) || [];
+        completedActivities = completedActivities
+          .filter((id) => Number.isInteger(id) && id >= 1 && id <= 6)
+          .filter((id, index, array) => array.indexOf(id) === index);
+
+        updateCompletionMessage(completedActivities.length);
+        showFinalThankYouPage();
+
+        // Update streak when health status is submitted
+        updateStreak(true);
+      }
+
+      function updateCompletionMessage(completedCount) {
+        const completionMessage = document.getElementById("completionMessage");
+
+        if (completedCount === 6) {
+          completionMessage.innerHTML = `
+            You have successfully completed all your daily activities and health
+            check for today!<br />
+            Your dedication to maintaining a healthy routine is truly commendable.
+          `;
+        } else {
+          completionMessage.innerHTML = `
+            You have successfully completed <strong>${completedCount}</strong> out of 6 daily activities and submitted your health status for today!<br />
+            Keep going — small wins add up to big change.
+          `;
+        }
+      }
+
+      function showFinalThankYouPage() {
+        document.getElementById("finalThankYouPage").style.display = "block";
+        document.getElementById("mainDashboard").style.display = "none";
+        // small entrance animation
+        const page = document.getElementById("finalThankYouPage");
+        page.style.opacity = 0;
+        page.style.transform = "translateY(8px) scale(0.996)";
+        setTimeout(() => {
+          page.style.transition = "all .32s ease";
+          page.style.opacity = 1;
+          page.style.transform = "translateY(0) scale(1)";
+        }, 30);
+      }
+
+      function setupCompletionButtons() {
+        // share button
+        const shareBtn = document.getElementById("shareAchievementBtn");
+        if (shareBtn) {
+          shareBtn.addEventListener("click", function () {
+            if (navigator.share) {
+              navigator
+                .share({
+                  title: "PRANA Achievement",
+                  text: "I completed my daily activities on PRANA!",
+                  url: window.location.href,
+                })
+                .then(() => console.log("Successful share"))
+                .catch((error) => console.log("Error sharing:", error));
+            } else {
+              navigator.clipboard.writeText(
+                "I completed my daily activities on PRANA! Check it out at " +
+                  window.location.href
+              );
+              showNotification("Achievement text copied to clipboard!");
+            }
+          });
+        }
+
+        // logout button (functional): clears localStorage and redirects to login
+        const logoutBtn = document.getElementById("logoutBtn");
+        if (logoutBtn) {
+          logoutBtn.addEventListener("click", function () {
+            // brief fade out then redirect
+            const page = document.getElementById("finalThankYouPage");
+            page.style.transition = "opacity .28s ease, transform .28s ease";
+            page.style.opacity = 0;
+            page.style.transform = "scale(.992) translateY(6px)";
+            // Clear local storage keys related to session (be careful to only clear relevant keys)
+            // If you want to clear everything, uncomment next line. Currently we clear student and session-related items.
+            localStorage.removeItem("student");
+            localStorage.removeItem("completedActivities");
+            localStorage.removeItem("healthStatus");
+            localStorage.removeItem("streakData");
+            localStorage.removeItem("lastResetDate");
+            setTimeout(() => {
+              window.location.href = "index.html";
+            }, 300);
+          });
+        }
       }
 
       function setCurrentDate() {
@@ -1078,57 +1548,134 @@
       }
 
       function updateProgress() {
-        const completedActivities = document.querySelectorAll(
-          ".activity-item.completed"
-        ).length;
-        const totalActivities =
-          document.querySelectorAll(".activity-item").length;
-        const progressPercentage =
-          (completedActivities / totalActivities) * 100;
+        let completedActivities =
+          JSON.parse(localStorage.getItem("completedActivities")) || [];
+        completedActivities = completedActivities
+          .filter((id) => Number.isInteger(id) && id >= 1 && id <= 6)
+          .filter((id, index, array) => array.indexOf(id) === index);
 
-        // Update progress text
-        document.querySelector(
-          ".progress-text span"
-        ).textContent = `${completedActivities}/${totalActivities}`;
+        const totalActivities = 6;
+        const completedCount = completedActivities.length;
 
-        // Update progress ring
-        const circumference = 2 * Math.PI * 40;
-        const offset =
-          circumference - (progressPercentage / 100) * circumference;
-        document.querySelector(".progress-ring-fill").style.strokeDashoffset =
-          offset;
+        if (completedCount > totalActivities) {
+          console.warn(
+            "Excess completed activities detected; capping at",
+            totalActivities
+          );
+        }
 
-        // Update percentage
-        document.querySelector(
-          ".progress-percentage"
-        ).textContent = `${Math.round(progressPercentage)}%`;
-
-        // Update weekly progress for current day
-        updateWeeklyProgress(completedActivities, totalActivities);
-      }
-
-      function updateWeeklyProgress(completed, total) {
-        const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        const today = new Date().getDay(); // 0 = Sunday, 1 = Monday, etc.
-        const todayElement = document.querySelector(
-          `.day:nth-child(${today + 1}) .day-status`
+        const validCompletedCount = Math.min(completedCount, totalActivities);
+        const progressPercentage = Math.round(
+          (validCompletedCount / totalActivities) * 100
         );
 
-        if (todayElement) {
-          if (completed === total) {
-            // All activities completed
-            todayElement.className = "day-status completed";
-            todayElement.innerHTML = '<i class="fas fa-check"></i>';
-          } else if (completed > 0) {
-            // Some activities completed
-            todayElement.className = "day-status in-progress";
-            todayElement.innerHTML = `<span>${completed}/${total}</span>`;
-          } else {
-            // No activities completed
-            todayElement.className = "day-status pending";
-            todayElement.innerHTML = "<span>-</span>";
+        const progressText = document.querySelector(".progress-text span");
+        if (progressText)
+          progressText.textContent = `${validCompletedCount}/${totalActivities}`;
+
+        // SVG progress ring update (r = 35)
+        const circumference = 2 * Math.PI * 35;
+        const offset =
+          circumference - (progressPercentage / 100) * circumference;
+        const progressRing = document.querySelector(".progress-ring-fill");
+        if (progressRing) progressRing.style.strokeDashoffset = offset;
+
+        const displayPercentage = Math.min(progressPercentage, 100);
+        const progressPercentageEl = document.querySelector(
+          ".progress-percentage"
+        );
+        if (progressPercentageEl)
+          progressPercentageEl.textContent = `${displayPercentage}%`;
+      }
+
+      function updateStreak(increment = false) {
+        let streakData = JSON.parse(localStorage.getItem("streakData")) || {
+          currentStreak: 0,
+          longestStreak: 0,
+          lastUpdate: null,
+        };
+        const today = new Date().toDateString();
+
+        if (increment) {
+          // Only increment if we haven't updated today
+          if (streakData.lastUpdate !== today) {
+            streakData.currentStreak += 1;
+            streakData.lastUpdate = today;
+            if (streakData.currentStreak > streakData.longestStreak)
+              streakData.longestStreak = streakData.currentStreak;
+            localStorage.setItem("streakData", JSON.stringify(streakData));
           }
+        } else if (streakData.lastUpdate && streakData.lastUpdate !== today) {
+          // Reset streak if we're not incrementing and it's a new day
+          streakData.currentStreak = 0;
+          streakData.lastUpdate = today;
+          localStorage.setItem("streakData", JSON.stringify(streakData));
         }
+
+        const streakCountEl = document.getElementById("streakCount");
+        if (streakCountEl) streakCountEl.textContent = streakData.currentStreak;
+        // Keep streak color visible on dark header
+        streakCountEl.style.color = "#fff";
+        if (increment && streakData.currentStreak > 0) {
+          streakCountEl.classList.add("streak-pulse");
+          setTimeout(() => streakCountEl.classList.remove("streak-pulse"), 500);
+        }
+      }
+
+      // helper for streak animation class (kept for compatibility)
+      (function addStreakPulseStyle() {
+        const style = document.createElement("style");
+        style.innerHTML = `@keyframes streakPulse {0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}} .streak-pulse{animation:streakPulse .45s ease-in-out}`;
+        document.head.appendChild(style);
+      })();
+
+      function getStreakColor(streak) {
+        if (streak >= 30) return "var(--accent-yellow)";
+        if (streak >= 14) return "var(--accent-yellow)";
+        if (streak >= 7) return "var(--accent-yellow)";
+        return "#fff";
+      }
+
+      function showDailyTip() {
+        const tips = [
+          {
+            text: "Start your day with a glass of warm water to kickstart your metabolism and hydrate your body.",
+            source: "Ayurvedic Wellness",
+          },
+          {
+            text: "Practice 5 deep breaths when you feel overwhelmed — it clears your head and improves focus instantly.",
+            source: "Mindfulness Practice",
+          },
+          {
+            text: "Study in 60–90 minute focused blocks with short breaks; your brain remembers more this way.",
+            source: "Cognitive Science",
+          },
+          {
+            text: "Keep a consistent sleep schedule — it boosts memory and mood more than extra study hours.",
+            source: "Sleep Medicine",
+          },
+          {
+            text: "Get at least 15 minutes of sunlight daily — small boosts in mood and energy compound fast.",
+            source: "Health & Nutrition",
+          },
+          {
+            text: "Write down 3 wins each evening; noticing progress keeps motivation alive.",
+            source: "Positive Psychology",
+          },
+          {
+            text: "Hydrate steadily through the day — your concentration dips when you skip water.",
+            source: "Nutrition Science",
+          },
+        ];
+
+        const dayOfWeek = new Date().getDay();
+        const tipIndex = dayOfWeek % tips.length;
+        const todayTip = tips[tipIndex];
+
+        document.getElementById("dailyTip").textContent = todayTip.text;
+        document.getElementById(
+          "tipSource"
+        ).textContent = `— ${todayTip.source}`;
       }
 
       function updateLastUpdatedTime() {
@@ -1144,49 +1691,43 @@
 
       function showNotification(message) {
         const notification = document.getElementById("successNotification");
-        const notificationContent = notification.querySelector(
-          ".notification-content"
+        const notificationMessage = document.getElementById(
+          "notificationMessage"
         );
-
-        notificationContent.innerHTML = `
-      <i class="fas fa-check-circle"></i>
-      <span>${message}</span>
-    `;
-
-        notification.classList.add("show");
-
-        setTimeout(() => {
-          notification.classList.remove("show");
-        }, 3000);
-      }
-
-      // Manual reset function for testing
-      function manualReset() {
-        if (
-          confirm(
-            "Reset all activities to pending? This will clear your progress for today."
-          )
-        ) {
-          resetAllActivities();
-          updateProgress();
-          showNotification("Activities reset manually!");
+        if (notification && notificationMessage) {
+          notificationMessage.textContent = message;
+          notification.classList.add("show");
+          setTimeout(() => notification.classList.remove("show"), 3000);
         }
       }
 
-      // Add manual reset button to header (optional)
-      document.addEventListener("DOMContentLoaded", function () {
-        // Add reset button to header
-        const header = document.querySelector(".header");
-        const resetButton = document.createElement("button");
-        resetButton.className = "mark-complete-btn";
-        resetButton.textContent = "Reset Day";
-        resetButton.onclick = manualReset;
-        resetButton.style.marginLeft = "10px";
-        resetButton.style.background = "var(--color-red-600)";
+      function manualReset() {
+        if (
+          confirm(
+            "Reset all activities and health status? This will clear your progress for today and reset your streak."
+          )
+        ) {
+          localStorage.removeItem("completedActivities");
+          localStorage.removeItem("healthStatus");
+          loadActivities();
+          updateProgress();
+          updateStreak(false);
 
-        const userInfo = document.querySelector(".user-info");
-        userInfo.appendChild(resetButton);
-      });
+          // Reset health options UI
+          document
+            .querySelectorAll(".health-option")
+            .forEach((opt) => opt.classList.remove("selected"));
+          const submitBtn = document.getElementById("submitHealthBtn");
+          if (submitBtn) submitBtn.disabled = true;
+          selectedHealthStatus = null;
+
+          // Ensure main dashboard visible
+          document.getElementById("finalThankYouPage").style.display = "none";
+          document.getElementById("mainDashboard").style.display = "block";
+
+          showNotification("All progress reset successfully!");
+        }
+      }
 
       // Auto-update time every minute
       setInterval(updateLastUpdatedTime, 60000);

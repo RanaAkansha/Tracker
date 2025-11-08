@@ -34,16 +34,16 @@
 
     <style>
       :root {
-        --color-black-600: #2a2c2a;
-        --color-black-500: #000000;
-        --color-black-200: #e5e7eb;
-        --color-black-100: #f3f4f6;
-        --color-green-600: #059669;
-        --color-green-500: #10b981;
-        --color-gray-800: #1f2937;
-        --color-gray-600: #4b5563;
-        --color-white: #ffffff;
-        --color-red-600: #dc2626;
+        --black-gradient: linear-gradient(135deg, #000000, #1a1a1a);
+        --white: #ffffff;
+        --gray-100: #f3f4f6;
+        --gray-300: #d1d5db;
+        --gray-500: #6b7280;
+        --gray-700: #374151;
+        --green-500: #22c55e;
+        --green-600: #16a34a;
+        --red-600: #dc2626;
+        --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.1);
       }
 
       * {
@@ -54,199 +54,291 @@
       }
 
       body {
-        background: linear-gradient(135deg, #232323 0%, #181616 100%);
-        color: var(--color-white);
+        background: #0b0b0b;
+        color: var(--gray-700);
         min-height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 2rem;
       }
 
-      h1 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: var(--color-white);
-        margin-bottom: 0.5rem;
-      }
-
-      p.subtitle {
-        color: var(--color-gray-600);
-        margin-bottom: 2rem;
+      /* HEADER BAR */
+      header {
+        background: var(--black-gradient);
+        width: 100%;
+        color: var(--white);
+        padding: 1.5rem 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        border-radius: 0 0 1.5rem 1.5rem;
         text-align: center;
+        animation: fadeInDown 0.8s ease;
       }
 
+      header::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 10%;
+        width: 80%;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--green-500),
+          transparent
+        );
+        animation: glow-line 3s infinite ease-in-out;
+      }
+
+      @keyframes glow-line {
+        0% {
+          opacity: 0.2;
+          transform: scaleX(0.5);
+        }
+        50% {
+          opacity: 1;
+          transform: scaleX(1);
+        }
+        100% {
+          opacity: 0.2;
+          transform: scaleX(0.5);
+        }
+      }
+
+      header h1 {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--white);
+      }
+
+      header p {
+        color: var(--gray-300);
+        font-size: 1rem;
+        margin-top: 0.5rem;
+      }
+
+      /* MAIN SECTION */
       .contact-container {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
         width: 100%;
-        max-width: 1000px;
-      }
-
-      .contact-form {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
+        max-width: 1200px;
         padding: 2rem;
-        border-radius: 1rem;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        animation: fadeInUp 1s ease;
       }
 
+      .contact-form,
+      .contact-info {
+        background: var(--white);
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: var(--shadow-soft);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .contact-form:hover,
+      .contact-info:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      }
+
+      /* FORM */
       .contact-form label {
         display: block;
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-        color: var(--color-white);
+        margin-bottom: 0.4rem;
+        font-weight: 600;
+        color: #111;
       }
 
       .contact-form input,
       .contact-form select,
       .contact-form textarea {
         width: 100%;
-        padding: 0.75rem 1rem;
-        margin-bottom: 1rem;
-        border: 1px solid var(--color-black-200);
-        border-radius: 0.5rem;
-        background: rgba(255, 255, 255, 0.1);
-        color: var(--color-white);
+        padding: 0.8rem 1rem;
+        margin-bottom: 1.2rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.75rem;
         font-size: 1rem;
-        transition: border 0.2s ease;
-      }
-
-      .contact-form select {
-        color: var(--color-white);
-      }
-
-      .contact-form select option {
-        background: var(--color-gray-800);
-        color: var(--color-white);
+        color: #111;
+        background: #f9fafb;
+        transition: all 0.3s ease;
       }
 
       .contact-form input:focus,
       .contact-form select:focus,
       .contact-form textarea:focus {
-        border-color: var(--color-green-500);
+        border-color: var(--green-500);
+        box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
         outline: none;
+        background: #ffffff;
       }
 
       .contact-form button {
         width: 100%;
-        background: var(--color-green-500);
-        color: var(--color-white);
-        border: none;
-        padding: 0.75rem;
-        border-radius: 0.5rem;
-        font-size: 1.1rem;
+        padding: 1rem;
+        font-size: 1rem;
         font-weight: 600;
+        color: var(--white);
+        background: var(--black-gradient);
+        border: none;
+        border-radius: 0.75rem;
         cursor: pointer;
         transition: all 0.3s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
       }
 
       .contact-form button:hover {
-        background: var(--color-green-600);
         transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
       }
 
       .contact-form button:disabled {
-        background: var(--color-gray-600);
+        background: var(--gray-300);
         cursor: not-allowed;
-        transform: none;
       }
 
-      .contact-info {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border-radius: 1rem;
-        padding: 2rem;
-      }
-
+      /* WARDEN INFO */
       .warden-card {
+        background: #f9fafb;
+        border-left: 4px solid var(--green-500);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
         margin-bottom: 1rem;
-        padding: 1rem;
-        border-left: 4px solid var(--color-green-500);
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .warden-card:hover {
+        transform: translateX(4px);
+        background: #ffffff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       }
 
       .warden-card h3 {
-        color: var(--color-white);
+        color: #111;
+        margin-bottom: 0.5rem;
         font-size: 1.1rem;
-        margin-bottom: 0.25rem;
+        font-weight: 600;
       }
 
       .warden-card p {
+        color: var(--gray-600);
         font-size: 0.9rem;
-        color: var(--color-gray-600);
+        margin: 0.25rem 0;
       }
 
+      .warden-card p i {
+        color: var(--green-500);
+        width: 18px;
+      }
+
+      /* NOTIFICATION */
       .notification {
         position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 1rem 1.5rem;
-        border-radius: 0.5rem;
+        top: 1rem;
+        right: 1rem;
+        background: var(--green-600);
         color: white;
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
         font-weight: 500;
-        z-index: 1000;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         display: none;
-      }
-
-      .notification.success {
-        background: var(--color-green-600);
-        display: block;
+        animation: fadeIn 0.5s ease forwards;
+        z-index: 999;
       }
 
       .notification.error {
-        background: var(--color-red-600);
-        display: block;
+        background: var(--red-600);
       }
 
-      .loading {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: 3px solid rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        border-top-color: #fff;
-        animation: spin 1s ease-in-out infinite;
-        margin-right: 10px;
+      /* FOOTER */
+      footer {
+        text-align: center;
+        color: var(--gray-500);
+        font-size: 0.9rem;
+        padding: 1rem;
+        border-top: 1px solid #222;
+        margin-top: 2rem;
+        animation: fadeInUp 1s ease;
       }
 
-      @keyframes spin {
+      footer strong {
+        color: #111;
+      }
+
+      /* ANIMATIONS */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
         to {
-          transform: rotate(360deg);
+          opacity: 1;
+          transform: translateY(0);
         }
       }
 
-      footer {
-        margin-top: 2rem;
-        text-align: center;
-        color: var(--color-gray-600);
-        font-size: 0.9rem;
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
-      @media (max-width: 768px) {
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
         .contact-container {
           grid-template-columns: 1fr;
         }
       }
+
+      @media (max-width: 600px) {
+        header h1 {
+          font-size: 1.8rem;
+        }
+        header p {
+          font-size: 0.9rem;
+        }
+        .contact-form,
+        .contact-info {
+          padding: 1.5rem;
+        }
+      }
     </style>
   </head>
-  <body>
-    <h1>Contact Us</h1>
-    <p class="subtitle">
-      Need help or have suggestions? Reach out to your hostel warden or the
-      PRANA team.
-    </p>
 
-    <div class="contact-container">
+  <body>
+    <header>
+      <h1>Contact Us</h1>
+      <p>
+        Need help or have suggestions? Reach out to your warden or PRANA team.
+      </p>
+    </header>
+
+    <main class="contact-container">
       <form class="contact-form" id="contactForm">
         <label for="name">Full Name</label>
         <input type="text" id="name" placeholder="Enter your name" required />
@@ -270,10 +362,10 @@
         <label for="hostel">Hostel</label>
         <select id="hostel" required>
           <option value="">Select Hostel</option>
-          <option value="Nivedita">Nivedita Hostel</option>
           <option value="Sanghmitra">Sanghmitra Hostel</option>
           <option value="Arvind">Arvind Hostel</option>
           <option value="Panini">Panini Hostel</option>
+          <option value="Nivedita">Nivedita Hostel</option>
         </select>
 
         <label for="queryType">Query Type</label>
@@ -294,17 +386,13 @@
           required
         ></textarea>
 
-        <button type="button" id="emailBtn">
-          <i class="fas fa-envelope"></i> Send to Admin Email
-        </button>
-
-        <button type="submit" id="submitBtn" style="margin-top: 10px">
-          <span id="btnText">Save to System</span>
+        <button type="submit" id="submitBtn">
+          <i class="fas fa-paper-plane"></i>
+          <span id="btnText">Submit & Send Email</span>
           <span id="btnLoading" class="loading" style="display: none"></span>
         </button>
       </form>
 
-      <!-- Contact Info -->
       <div class="contact-info">
         <div class="warden-card">
           <h3>Nivedita Hostel</h3>
@@ -328,51 +416,80 @@
           <p><i class="fa-solid fa-envelope"></i> panini.hostel@dsvv.ac.in</p>
           <p><i class="fa-solid fa-phone"></i> +91-XXXXXXXXXX</p>
         </div>
-
-        <div
-          class="warden-card"
-          style="border-left-color: var(--color-green-500); margin-top: 1rem"
-        >
+        <div class="warden-card">
           <h3>PRANA Support Team</h3>
-          <p><i class="fa-solid fa-envelope"></i> support@prana.dsvv.ac.in</p>
+          <p><i class="fa-solid fa-envelope"></i> supportp.rana@dsvv.ac.in</p>
           <p><i class="fa-solid fa-phone"></i> +91-XXXXXXXXXX</p>
           <p><i class="fa-solid fa-clock"></i> 9:00 AM - 6:00 PM</p>
         </div>
       </div>
-    </div>
+    </main>
 
-    <!-- Notification -->
     <div id="notification" class="notification"></div>
 
-    <footer>
-      <p>© 2025 PRANA. All rights reserved.</p>
+    <footer class="footer">
+      <p class="footer-text">
+        <a href="contact.html" style="color: #10b981; text-decoration: none"
+          >Contact Support</a
+        >
+        |
+        <a
+          href="index.html"
+          onclick="logoutAdmin()"
+          style="color: #10b981; text-decoration: none"
+          >Logout</a
+        >
+      </p>
     </footer>
 
     <script>
+      function logoutAdmin() {
+        localStorage.removeItem("admin");
+        localStorage.removeItem("token");
+      }
+    </script>
+
+    <script>
       const API_URL = "http://localhost:3000";
+      const ADMIN_EMAIL = "akansharajput1035@gmail.com";
+      const STUDENT_EMAIL = "akansharana0620@gmail.com";
 
-      // Email functionality
-      document
-        .getElementById("emailBtn")
-        .addEventListener("click", function () {
-          sendEmailToAdmin();
-        });
-
-      // Original form submission
       document
         .getElementById("contactForm")
         .addEventListener("submit", async function (e) {
           e.preventDefault();
-          await saveMessageToSystem();
+          await handleFormSubmission();
         });
 
-      function sendEmailToAdmin() {
+      async function handleFormSubmission() {
+        const submitBtn = document.getElementById("submitBtn");
+        const btnText = document.getElementById("btnText");
+
         const formData = getFormData();
+        if (!validateForm(formData)) return;
 
-        if (!validateForm(formData)) {
-          return;
+        submitBtn.disabled = true;
+        btnText.textContent = "Processing...";
+
+        try {
+          await saveMessageToSystem(formData);
+          sendEmailToAdmin(formData);
+          showNotification(
+            "Form submitted successfully! Email client opened - please send the pre-filled email to complete your request."
+          );
+          resetForm();
+        } catch (error) {
+          showNotification(
+            "Error processing your request. Please try again.",
+            "error"
+          );
+        } finally {
+          submitBtn.disabled = false;
+          btnText.textContent = "Submit & Send Email";
         }
+      }
 
+      function sendEmailToAdmin(formData) {
         const subject = `PRANA Contact: ${formData.query_type} from ${formData.name}`;
         const body = `
 Name: ${formData.name}
@@ -386,76 +503,32 @@ ${formData.message}
 
 ---
 Sent from PRANA System
-    `.trim();
+`.trim();
 
-        const mailtoLink = `mailto:akansharana0620@gmail.com?subject=${encodeURIComponent(
+        const mailtoLink = `mailto:${ADMIN_EMAIL}?subject=${encodeURIComponent(
           subject
         )}&body=${encodeURIComponent(body)}`;
-
-        // Open email client
-        window.location.href = mailtoLink;
-
-        // Also save to system
-        saveMessageToSystem();
-
-        showNotification(
-          "Email client opened! Please send the pre-filled email.",
-          "success"
-        );
+        window.open(mailtoLink, "_blank");
       }
 
-      async function saveMessageToSystem() {
-        const submitBtn = document.getElementById("submitBtn");
-        const btnText = document.getElementById("btnText");
-        const btnLoading = document.getElementById("btnLoading");
-
-        const formData = getFormData();
-
-        if (!validateForm(formData)) {
-          return;
-        }
-
-        // Show loading state
-        submitBtn.disabled = true;
-        btnText.textContent = "Saving...";
-        btnLoading.style.display = "inline-block";
-
+      async function saveMessageToSystem(formData) {
         try {
-          // Try to send to backend API
           const response = await fetch(`${API_URL}/api/contact/submit`, {
             method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               ...formData,
               created_at: new Date().toISOString(),
             }),
           });
 
-          const data = await response.json();
-
-          if (response.ok) {
-            showNotification(
-              "Message saved to system successfully!",
-              "success"
-            );
-            resetForm();
-          } else {
+          if (!response.ok) {
+            const data = await response.json();
             throw new Error(data.message || "Failed to save message");
           }
         } catch (error) {
           console.error("Error saving message:", error);
-
-          // If backend fails, store locally
           storeMessageLocally(formData);
-          showNotification("Message saved locally!", "success");
-          resetForm();
-        } finally {
-          // Reset button state
-          submitBtn.disabled = false;
-          btnText.textContent = "Save to System";
-          btnLoading.style.display = "none";
         }
       }
 
@@ -482,94 +555,62 @@ Sent from PRANA System
           showNotification("Please fill in all fields.", "error");
           return false;
         }
-
-        // Basic email validation
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
         if (!emailRegex.test(data.email)) {
-          showNotification("Please enter a valid email address.", "error");
+          showNotification("Please enter a valid email.", "error");
           return false;
         }
-
-        // Scholar ID validation (6-8 digits)
-        const scholarIdRegex = /^\d{6,8}$/;
-        if (!scholarIdRegex.test(data.scholar_id)) {
-          showNotification(
-            "Please enter a valid Scholar ID (6-8 digits).",
-            "error"
-          );
-          return false;
-        }
-
         return true;
       }
 
       function storeMessageLocally(message) {
-        const storedMessages = JSON.parse(
+        const stored = JSON.parse(
           localStorage.getItem("prana_contact_messages") || "[]"
         );
-        storedMessages.push({
+        stored.push({
           ...message,
           id: Date.now(),
           status: "pending",
           date: new Date().toISOString(),
         });
-        localStorage.setItem(
-          "prana_contact_messages",
-          JSON.stringify(storedMessages)
-        );
-
-        console.log("Message stored locally:", message);
+        localStorage.setItem("prana_contact_messages", JSON.stringify(stored));
       }
 
       function showNotification(message, type) {
-        const notification = document.getElementById("notification");
-        notification.textContent = message;
-        notification.className = `notification ${type}`;
-
-        setTimeout(() => {
-          notification.style.display = "none";
-        }, 5000);
+        const note = document.getElementById("notification");
+        note.textContent = message;
+        note.className = `notification ${type === "error" ? "error" : ""}`;
+        note.style.display = "block";
+        setTimeout(() => (note.style.display = "none"), 5000);
       }
 
       function resetForm() {
         document.getElementById("contactForm").reset();
       }
 
-      // Auto-fill for logged-in students
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener("DOMContentLoaded", () => {
         const student = JSON.parse(localStorage.getItem("student"));
-
         if (student) {
           document.getElementById("name").value = student.name || "";
           document.getElementById("scholarId").value = student.scholar_id || "";
-
-          if (student.email) {
-            document.getElementById("email").value = student.email;
-          } else if (student.scholar_id) {
-            document.getElementById(
-              "email"
-            ).value = `${student.scholar_id}@dsvv.ac.in`;
-          }
+          document.getElementById("email").value =
+            student.email || `${student.scholar_id}@dsvv.ac.in`;
+        } else {
+          document.getElementById("email").value = STUDENT_EMAIL;
         }
       });
-
-      // Add some interactivity to the form
-      document
-        .getElementById("queryType")
-        .addEventListener("change", function (e) {
-          const messageField = document.getElementById("message");
-
-          const hints = {
-            Technical: "Describe the technical issue you are facing...",
-            "Activity Log": "Tell us about your activity logging problem...",
-            Health: "Share your health concerns...",
-            Feedback: "We value your feedback...",
-            Other: "How can we help you?",
-          };
-
-          messageField.placeholder =
-            hints[e.target.value] || "Describe your issue or feedback...";
-        });
+      const form = document.getElementById("contactForm");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Your message has been sent successfully!");
+        if (localStorage.getItem("student")) {
+          window.location.href = "student.html";
+        } else if (localStorage.getItem("admin")) {
+          window.location.href = "admin.html";
+        } else {
+          window.location.href = "index.html";
+        }
+      });
     </script>
   </body>
 </html>

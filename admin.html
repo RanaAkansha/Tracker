@@ -9,7 +9,7 @@
     />
     <meta
       name="keywords"
-      content="PRANA, warden portal, hostel management, student reports"
+      content="PRANA, warden portal, hostel management, student reports, prana"
     />
     <meta name="robots" content="noindex, nofollow" />
     <meta property="og:title" content="PRANA | Warden Dashboard" />
@@ -264,6 +264,16 @@
         margin-bottom: 1.5rem;
       }
 
+      .last-updated {
+        font-size: 0.875rem;
+        color: var(--color-gray-600);
+        margin-bottom: 1rem;
+      }
+
+      .last-updated i {
+        margin-right: 0.25rem;
+      }
+
       .table-container {
         overflow-x: auto;
       }
@@ -312,6 +322,31 @@
         color: var(--color-yellow-700);
       }
 
+      .status-badge.missed {
+        background-color: var(--color-red-100);
+        color: var(--color-red-700);
+      }
+
+      .status-badge.excellent {
+        background-color: var(--color-green-100);
+        color: var(--color-green-700);
+      }
+
+      .status-badge.good {
+        background-color: var(--color-blue-100);
+        color: var(--color-blue-700);
+      }
+
+      .status-badge.fair {
+        background-color: var(--color-yellow-100);
+        color: var(--color-yellow-700);
+      }
+
+      .status-badge.not-well {
+        background-color: var(--color-red-100);
+        color: var(--color-red-700);
+      }
+
       .action-btn {
         padding: 0.5rem 1rem;
         border: none;
@@ -342,28 +377,6 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
 
-      .charts-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .chart-card {
-        padding: 1.5rem;
-      }
-
-      .chart-placeholder {
-        height: 250px;
-        background-color: var(--color-gray-100);
-        border-radius: 0.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--color-gray-500);
-        font-size: 0.875rem;
-      }
-
       .footer {
         margin-top: 2rem;
         text-align: center;
@@ -374,14 +387,110 @@
         font-size: 0.875rem;
       }
 
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+        color: white;
+        font-weight: 500;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+        display: none;
+      }
+
+      .notification.success {
+        background: var(--color-green-600);
+        display: block;
+      }
+
+      .notification.error {
+        background: var(--color-red-600);
+        display: block;
+      }
+
+      .notification.info {
+        background: var(--color-blue-600);
+        display: block;
+      }
+
+      .real-time-indicator {
+        display: inline-flex;
+        align-items: center;
+        background: var(--color-green-500);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 1rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        margin-left: 1rem;
+      }
+
+      .real-time-indicator .pulse {
+        width: 8px;
+        height: 8px;
+        background: white;
+        border-radius: 50%;
+        margin-right: 0.5rem;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 10px;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .progress-cell {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .progress-bar {
+        flex-grow: 1;
+        height: 8px;
+        background-color: var(--color-gray-200);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        height: 100%;
+        background-color: var(--color-green-500);
+        border-radius: 4px;
+        transition: width 0.3s ease;
+      }
+
       /* Responsive Design */
       @media (max-width: 1024px) {
         .dashboard-grid {
           grid-template-columns: repeat(2, 1fr);
-        }
-
-        .charts-container {
-          grid-template-columns: 1fr;
         }
       }
 
@@ -412,7 +521,12 @@
           </div>
           <div>
             <h1 class="logo-title">PRANA</h1>
-            <p class="logo-subtitle">Admin Dashboard</p>
+            <p class="logo-subtitle">
+              Admin Dashboard
+              <span class="real-time-indicator" id="realtimeIndicator"
+                ><span class="pulse"></span>LIVE</span
+              >
+            </p>
           </div>
         </div>
         <div class="user-info">
@@ -429,13 +543,12 @@
         </div>
       </header>
 
-      <!-- Statistics Cards -->
       <div class="dashboard-grid">
         <div class="stat-card">
           <div class="stat-icon total">
             <i class="fas fa-users"></i>
           </div>
-          <div class="stat-value">1,248</div>
+          <div class="stat-value" id="totalStudents">0</div>
           <div class="stat-label">Total Students</div>
         </div>
 
@@ -443,91 +556,56 @@
           <div class="stat-icon active">
             <i class="fas fa-user-check"></i>
           </div>
-          <div class="stat-value">892</div>
-          <div class="stat-label">Active Today</div>
+          <div class="stat-value" id="activeToday">0</div>
+          <div class="stat-label">Submitted Today</div>
         </div>
 
         <div class="stat-card">
           <div class="stat-icon inactive">
             <i class="fas fa-user-clock"></i>
           </div>
-          <div class="stat-value">356</div>
-          <div class="stat-label">Inactive</div>
+          <div class="stat-value" id="inactiveToday">0</div>
+          <div class="stat-label">Pending Today</div>
         </div>
 
         <div class="stat-card">
           <div class="stat-icon completed">
             <i class="fas fa-chart-line"></i>
           </div>
-          <div class="stat-value">78%</div>
-          <div class="stat-label">Completion Rate</div>
+          <div class="stat-value" id="completionRate">0%</div>
+          <div class="stat-label">Average Completion</div>
         </div>
       </div>
 
       <!-- Recent Activity -->
       <div class="card">
-        <h3 class="section-title">Recent Student Activity</h3>
+        <div class="activities-header">
+          <h3 class="section-title">Today's Student Submissions</h3>
+          <div class="last-updated">
+            <i class="far fa-clock"></i>
+            <span id="lastUpdated">Last updated: Loading...</span>
+          </div>
+        </div>
         <div class="table-container">
           <table>
             <thead>
               <tr>
                 <th>Student Name</th>
                 <th>Scholar ID</th>
-                <th>Activity</th>
-                <th>Time</th>
-                <th>Status</th>
+                <th>Activities Completed</th>
+                <th>Progress</th>
+                <th>Health Status</th>
+                <th>Last Updated</th>
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="activitiesTableBody">
               <tr>
-                <td>Akansha Rana</td>
-                <td>23144003</td>
-                <td>Morning Prayer</td>
-                <td>05:15 AM</td>
-                <td><span class="status-badge active">Completed</span></td>
-                <td>
-                  <button class="action-btn view">View</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Rahul Sharma</td>
-                <td>23144015</td>
-                <td>Yoga</td>
-                <td>06:30 AM</td>
-                <td><span class="status-badge active">Completed</span></td>
-                <td>
-                  <button class="action-btn view">View</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Priya Patel</td>
-                <td>23144028</td>
-                <td>Shramdaan</td>
-                <td>04:45 PM</td>
-                <td><span class="status-badge pending">Pending</span></td>
-                <td>
-                  <button class="action-btn view">View</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Vikram Singh</td>
-                <td>23144042</td>
-                <td>Meditation</td>
-                <td>06:10 PM</td>
-                <td><span class="status-badge active">Completed</span></td>
-                <td>
-                  <button class="action-btn view">View</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Anjali Gupta</td>
-                <td>23144056</td>
-                <td>Evening Prayer</td>
-                <td>08:20 PM</td>
-                <td><span class="status-badge inactive">Missed</span></td>
-                <td>
-                  <button class="action-btn view">View</button>
+                <td
+                  colspan="7"
+                  style="text-align: center; color: var(--color-gray-500)"
+                >
+                  Loading submissions...
                 </td>
               </tr>
             </tbody>
@@ -535,36 +613,25 @@
         </div>
       </div>
 
-      <!-- Charts Section -->
-      <!-- <div class="charts-container">
-        <div class="card chart-card">
-          <h3 class="section-title">Activity Completion Rate</h3>
-          <div class="chart-placeholder">
-            <i class="fas fa-chart-pie"></i> Activity Completion Chart
-          </div>
-        </div>
-
-        <div class="card chart-card">
-          <h3 class="section-title">Weekly Participation</h3>
-          <div class="chart-placeholder">
-            <i class="fas fa-chart-bar"></i> Weekly Participation Chart
-          </div>
-        </div>
-      </div> -->
-
-      <!-- Footer -->
       <footer class="footer">
         <p class="footer-text">
-          PRANA - Productivity & Routine Activity Noting Application
+          © 2025 PRANA. All rights reserved.<br />
+          <br />Made with passion by Akansha Rana.
         </p>
-        <p class="footer-text">Admin Dashboard v1.0</p>
       </footer>
     </div>
 
+    <div id="notification" class="notification"></div>
+
     <script>
+      // Prevent back navigation to login page
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+        history.go(1);
+      };
+
       // Authentication check for admin
       document.addEventListener("DOMContentLoaded", function () {
-        // Check if admin is logged in
         const admin = JSON.parse(localStorage.getItem("admin"));
         const token = localStorage.getItem("token");
 
@@ -576,15 +643,88 @@
           window.location.href = "index.html";
           return;
         }
-
-        // If logged in, continue loading the dashboard
         console.log("Admin logged in:", admin);
         initAdminDashboard();
       });
 
-      const API_URL = "http://localhost:3000";
       let currentAdmin = null;
       let refreshInterval;
+
+      // Function to get all student submissions from localStorage
+      function getStudentSubmissions() {
+        const today = new Date().toDateString();
+        const submissions = [];
+
+        // Get all keys from localStorage
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+
+          // Check if this is a student entry (contains student data)
+          if (
+            key.includes("student") ||
+            key === "completedActivities" ||
+            key === "healthStatus"
+          ) {
+            continue;
+          }
+
+          try {
+            const item = localStorage.getItem(key);
+            const data = JSON.parse(item);
+
+            // Check if this is a student submission with today's date
+            if (data && data.lastResetDate === today) {
+              // This is a student's data for today
+              const studentData = {
+                name: data.name || "Unknown Student",
+                scholar_id: data.scholar_id || "N/A",
+                completedActivities: data.completedActivities || [],
+                healthStatus: data.healthStatus || null,
+                lastUpdated: data.lastUpdated || new Date().toISOString(),
+                submitted:
+                  !!(
+                    data.completedActivities &&
+                    data.completedActivities.length > 0
+                  ) || !!data.healthStatus,
+              };
+
+              submissions.push(studentData);
+            }
+          } catch (e) {
+            // Skip non-JSON items or invalid data
+            continue;
+          }
+        }
+
+        // Also check for individual student data (from student dashboard localStorage)
+        const studentData = localStorage.getItem("student");
+        if (studentData) {
+          try {
+            const student = JSON.parse(studentData);
+            const completedActivities = JSON.parse(
+              localStorage.getItem("completedActivities") || "[]"
+            );
+            const healthStatus = localStorage.getItem("healthStatus");
+            const lastResetDate = localStorage.getItem("lastResetDate");
+            const today = new Date().toDateString();
+
+            if (lastResetDate === today) {
+              submissions.push({
+                name: student.name || "Akansha Rana",
+                scholar_id: student.scholar_id || "23144003",
+                completedActivities: completedActivities,
+                healthStatus: healthStatus,
+                lastUpdated: new Date().toISOString(),
+                submitted: completedActivities.length > 0 || !!healthStatus,
+              });
+            }
+          } catch (e) {
+            console.error("Error parsing student data:", e);
+          }
+        }
+
+        return submissions;
+      }
 
       async function initAdminDashboard() {
         currentAdmin = JSON.parse(localStorage.getItem("admin"));
@@ -595,212 +735,209 @@
         document.getElementById("adminId").textContent = `ID: ADM-${
           currentAdmin.id || "001"
         }`;
-
-        // Set current date
-        setCurrentDate();
-
         // Load initial data
         await loadDashboardStats();
         await loadRecentActivities();
-
         // Start auto-refresh
         startAutoRefresh();
-
         // Add refresh button functionality
         addRefreshButton();
+        // Set up localStorage listener for real-time updates
+        setupLocalStorageListener();
+      }
+
+      function setupLocalStorageListener() {
+        window.addEventListener("storage", function (e) {
+          if (
+            e.key === "completedActivities" ||
+            e.key === "healthStatus" ||
+            e.key === "lastResetDate"
+          ) {
+            console.log("Storage change detected, refreshing data...");
+            refreshAllData();
+            showNotification("New student submission detected!", "info");
+          }
+        });
+
+        // Also check for changes periodically (for same-tab updates)
+        setInterval(() => {
+          refreshAllData();
+        }, 5000); // Check every 5 seconds
+      }
+
+      function showRealtimeIndicator(connected) {
+        const indicator = document.getElementById("realtimeIndicator");
+        if (connected) {
+          indicator.style.background = "var(--color-green-500)";
+          indicator.innerHTML = '<span class="pulse"></span>LIVE';
+        } else {
+          indicator.style.background = "var(--color-red-500)";
+          indicator.innerHTML = '<span class="pulse"></span>OFFLINE';
+        }
+      }
+
+      async function refreshAllData() {
+        await loadDashboardStats();
+        await loadRecentActivities();
       }
 
       async function loadDashboardStats() {
         try {
-          console.log("Loading dashboard stats...");
-          const response = await fetch(`${API_URL}/api/admin/stats`);
+          console.log("Loading dashboard stats from actual student data...");
 
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
+          const submissions = getStudentSubmissions();
 
-          const data = await response.json();
-          console.log("Stats response:", data);
+          // Calculate stats from actual data
+          const totalStudents = Math.max(submissions.length, 1); // At least 1 for demo
+          const submittedToday = submissions.filter((s) => s.submitted).length;
+          const pendingToday = totalStudents - submittedToday;
+
+          // Calculate average completion rate
+          let totalCompletion = 0;
+          submissions.forEach((student) => {
+            const completion = student.completedActivities
+              ? Math.round((student.completedActivities.length / 6) * 100)
+              : 0;
+            totalCompletion += completion;
+          });
+          const averageCompletion =
+            submissions.length > 0
+              ? Math.round(totalCompletion / submissions.length)
+              : 0;
 
           // Update stat cards with real data
-          updateStatsCards(data);
+          updateStatsCards({
+            totalStudents,
+            submittedToday,
+            pendingToday,
+            averageCompletion,
+          });
         } catch (error) {
           console.error("Error loading stats:", error);
-          // Use demo stats if API fails
-          useDemoStats();
+          showNotification("Error loading statistics", "error");
+          updateStatsCards({
+            totalStudents: 1,
+            submittedToday: 0,
+            pendingToday: 1,
+            averageCompletion: 0,
+          });
         }
       }
 
       function updateStatsCards(data) {
-        const statCards = document.querySelectorAll(".stat-value");
-
-        // Update with real data from API
-        if (statCards[0]) statCards[0].textContent = data.totalStudents || "0";
-        if (statCards[1]) statCards[1].textContent = data.activeToday || "0";
-        if (statCards[2]) statCards[2].textContent = data.inactive || "0";
-
-        // Calculate completion rate if not provided
-        const completionRate =
-          data.completionRate ||
-          (data.totalStudents > 0
-            ? Math.round((data.activeToday / data.totalStudents) * 100)
-            : 0);
-
-        if (statCards[3]) statCards[3].textContent = completionRate + "%";
-
-        // Update last updated time
+        // Update with real data
+        document.getElementById("totalStudents").textContent =
+          data.totalStudents || "0";
+        document.getElementById("activeToday").textContent =
+          data.submittedToday || "0";
+        document.getElementById("inactiveToday").textContent =
+          data.pendingToday || "0";
+        document.getElementById("completionRate").textContent =
+          (data.averageCompletion || "0") + "%";
         updateLastUpdatedTime();
       }
 
       async function loadRecentActivities() {
         try {
-          console.log("Loading recent activities...");
-          const response = await fetch(`${API_URL}/api/admin/activities`);
+          console.log("Loading recent activities from actual student data...");
 
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
+          const submissions = getStudentSubmissions();
 
-          const data = await response.json();
-          console.log("Recent activities response:", data);
-
-          if (data.activities && data.activities.length > 0) {
-            updateActivitiesTable(data.activities);
-          } else if (data.success && data.recentActivities) {
-            updateActivitiesTable(data.recentActivities);
+          if (submissions && submissions.length > 0) {
+            updateActivitiesTable(submissions);
           } else {
-            // Use demo data if no activities from API
-            useDemoActivities();
+            // Show empty state - no submissions today
+            updateActivitiesTable([]);
           }
         } catch (error) {
           console.error("Error loading activities:", error);
-          // Use demo data if API fails
-          useDemoActivities();
+          showNotification("Error loading submissions", "error");
+          // Show empty state on error
+          updateActivitiesTable([]);
         }
       }
 
-      function updateActivitiesTable(activities) {
-        const tbody = document.querySelector("table tbody");
+      function updateActivitiesTable(submissions) {
+        const tbody = document.getElementById("activitiesTableBody");
         tbody.innerHTML = "";
 
-        // Sort activities by time (newest first)
-        activities.sort(
-          (a, b) =>
-            new Date(b.completionTime || b.created_at) -
-            new Date(a.completionTime || a.created_at)
-        );
+        if (!submissions || submissions.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="7" style="text-align: center; color: var(--color-gray-500);">
+                No student submissions recorded yet today.<br>
+                <small>Students need to submit their activities from the student dashboard.</small>
+              </td>
+            </tr>
+          `;
+          return;
+        }
 
-        // Show only latest 10 activities
-        const recentActivities = activities.slice(0, 10);
-
-        recentActivities.forEach((activity) => {
-          const row = document.createElement("tr");
-
-          // Determine status
-          let statusClass, statusText;
-          if (activity.status === "completed" || activity.completed) {
-            statusClass = "active";
-            statusText = "Completed";
-          } else if (activity.status === "missed" || activity.missed) {
-            statusClass = "inactive";
-            statusText = "Missed";
-          } else {
-            statusClass = "pending";
-            statusText = "Pending";
-          }
-
-          // Format time
-          const activityTime = activity.completionTime
-            ? new Date(activity.completionTime).toLocaleTimeString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-              })
-            : activity.activity_time || "All Day";
-
-          row.innerHTML = `
-        <td>${activity.student_name || activity.name || "Student"}</td>
-        <td>${activity.scholar_id || "N/A"}</td>
-        <td>${activity.activity_name || activity.name || "Activity"}</td>
-        <td>${activityTime}</td>
-        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
-        <td><button class="action-btn view" onclick="viewStudentDetails('${
-          activity.scholar_id
-        }')">View</button></td>
-      `;
-          tbody.appendChild(row);
+        // Sort submissions by last updated (newest first)
+        const sortedSubmissions = [...submissions].sort((a, b) => {
+          return new Date(b.lastUpdated) - new Date(a.lastUpdated);
         });
 
-        // Update last updated time
+        sortedSubmissions.forEach((student) => {
+          const row = document.createElement("tr");
+
+          // Format last updated time
+          let lastUpdatedText = "Not submitted";
+          if (student.lastUpdated) {
+            const date = new Date(student.lastUpdated);
+            lastUpdatedText = date.toLocaleTimeString("en-US", {
+              hour: "2-digit",
+              minute: "2-digit",
+            });
+          }
+
+          // Format health status
+          let healthStatusBadge =
+            '<span class="status-badge inactive">Not Reported</span>';
+          if (student.healthStatus) {
+            const statusText =
+              {
+                excellent: "Excellent",
+                good: "Good",
+                fair: "Fair",
+                "not-well": "Not Well",
+              }[student.healthStatus] || "Unknown";
+
+            healthStatusBadge = `<span class="status-badge ${student.healthStatus}">${statusText}</span>`;
+          }
+
+          // Calculate completion data
+          const completedCount = student.completedActivities
+            ? student.completedActivities.length
+            : 0;
+          const progressPercentage = Math.round((completedCount / 6) * 100);
+
+          // Progress bar
+          const progressBar = `
+            <div class="progress-cell">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: ${progressPercentage}%"></div>
+              </div>
+              <span>${completedCount}/6</span>
+            </div>
+          `;
+
+          row.innerHTML = `
+            <td>${student.name}</td>
+            <td>${student.scholar_id}</td>
+            <td>${completedCount}</td>
+            <td>${progressBar}</td>
+            <td>${healthStatusBadge}</td>
+            <td>${lastUpdatedText}</td>
+            <td>
+              <button class="action-btn view" onclick="viewStudentDetails('${student.scholar_id}')">
+                <i class="fas fa-eye"></i> View
+              </button>
+            </td>
+          `;
+          tbody.appendChild(row);
+        });
         updateLastUpdatedTime();
-      }
-
-      function useDemoStats() {
-        // Use demo data with more realistic numbers
-        const demoStats = {
-          totalStudents: Math.floor(Math.random() * 100) + 1200, // 1200-1300
-          activeToday: Math.floor(Math.random() * 200) + 800, // 800-1000
-          inactive: Math.floor(Math.random() * 100) + 300, // 300-400
-          completionRate: Math.floor(Math.random() * 20) + 70, // 70-90%
-        };
-
-        updateStatsCards(demoStats);
-      }
-
-      function useDemoActivities() {
-        // Generate demo activities with current time
-        const demoActivities = [
-          {
-            student_name: "Akansha Rana",
-            scholar_id: "23144003",
-            activity_name: "Morning Prayer",
-            completionTime: new Date(),
-            status: "completed",
-          },
-          {
-            student_name: "Rahul Sharma",
-            scholar_id: "23144015",
-            activity_name: "Yoga",
-            completionTime: new Date(Date.now() - 30 * 60 * 1000), // 30 mins ago
-            status: "completed",
-          },
-          {
-            student_name: "Priya Patel",
-            scholar_id: "23144028",
-            activity_name: "Shramdaan",
-            completionTime: null,
-            status: "pending",
-          },
-          {
-            student_name: "Vikram Singh",
-            scholar_id: "23144042",
-            activity_name: "Meditation",
-            completionTime: new Date(Date.now() - 15 * 60 * 1000), // 15 mins ago
-            status: "completed",
-          },
-          {
-            student_name: "Anjali Gupta",
-            scholar_id: "23144056",
-            activity_name: "Evening Prayer",
-            completionTime: null,
-            status: "missed",
-          },
-        ];
-
-        updateActivitiesTable(demoActivities);
-      }
-
-      function setCurrentDate() {
-        const now = new Date();
-        const options = {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        };
-        const currentDateEl = document.getElementById("currentDate");
-        if (currentDateEl) {
-          currentDateEl.textContent = now.toLocaleDateString("en-US", options);
-        }
       }
 
       function updateLastUpdatedTime() {
@@ -810,20 +947,9 @@
           minute: "2-digit",
           second: "2-digit",
         });
-
-        // Update last updated indicator
-        const lastUpdatedElement = document.querySelector(".last-updated");
-        if (!lastUpdatedElement) {
-          // Create last updated element if it doesn't exist
-          const activitiesHeader =
-            document.querySelector(".section-title").parentElement;
-          const lastUpdated = document.createElement("div");
-          lastUpdated.className = "last-updated";
-          lastUpdated.innerHTML = `<i class="far fa-clock"></i> Last updated: ${timeString}`;
-          activitiesHeader.appendChild(lastUpdated);
-        } else {
-          lastUpdatedElement.innerHTML = `<i class="far fa-clock"></i> Last updated: ${timeString}`;
-        }
+        document.getElementById(
+          "lastUpdated"
+        ).textContent = `Last updated: ${timeString}`;
       }
 
       function startAutoRefresh() {
@@ -831,17 +957,15 @@
         if (refreshInterval) {
           clearInterval(refreshInterval);
         }
-
-        // Refresh every 30 seconds
+        // Refresh every 10 seconds to check for new submissions
         refreshInterval = setInterval(async () => {
           console.log("Auto-refreshing admin dashboard...");
           await loadDashboardStats();
           await loadRecentActivities();
-        }, 30000); // 30 seconds
+        }, 10000); // 10 seconds
       }
 
       function addRefreshButton() {
-        // Add refresh button to header
         const userInfo = document.querySelector(".user-info");
         const refreshButton = document.createElement("button");
         refreshButton.className = "action-btn view";
@@ -863,14 +987,11 @@
         }
 
         try {
-          await loadDashboardStats();
-          await loadRecentActivities();
-
-          // Show success notification
-          showNotification("Data refreshed successfully!");
+          await refreshAllData();
+          showNotification("Data refreshed successfully!", "success");
         } catch (error) {
           console.error("Manual refresh error:", error);
-          showNotification("Refresh failed. Using cached data.", "error");
+          showNotification("Refresh failed", "error");
         } finally {
           // Remove spinning animation
           if (refreshButton) {
@@ -881,51 +1002,48 @@
         }
       }
 
-      function viewStudentDetails(scholarId) {
-        // This would typically open a modal or navigate to student details
-        console.log("Viewing details for student:", scholarId);
-        alert(
-          `Viewing details for student: ${scholarId}\n\nThis would typically show:\n- Student profile\n- Activity history\n- Health status\n- Attendance records`
-        );
+      function viewStudentDetails(studentId) {
+        // Show detailed view of student submission
+        const submissions = getStudentSubmissions();
+        const student = submissions.find((s) => s.scholar_id === studentId);
 
-        // In a real implementation, you might:
-        // window.location.href = `student-details.html?id=${scholarId}`;
-        // OR open a modal with student details
+        if (student) {
+          const activityNames = {
+            1: "Morning Prayer",
+            2: "Yoga",
+            3: "Yagya",
+            4: "Shramdaan",
+            5: "Naad Yog",
+            6: "Evening Prayer",
+          };
+
+          let activityDetails = "No activities completed";
+          if (
+            student.completedActivities &&
+            student.completedActivities.length > 0
+          ) {
+            activityDetails = student.completedActivities
+              .map((id) => `${id}. ${activityNames[id] || `Activity ${id}`}`)
+              .join("\n");
+          }
+
+          alert(
+            `Student Details:\n\nName: ${student.name}\nScholar ID: ${
+              student.scholar_id
+            }\n\nCompleted Activities:\n${activityDetails}\n\nHealth Status: ${
+              student.healthStatus || "Not reported"
+            }`
+          );
+        } else {
+          alert("Student details not found");
+        }
       }
 
       function showNotification(message, type = "success") {
-        // Create notification element if it doesn't exist
-        let notification = document.getElementById("adminNotification");
-
-        if (!notification) {
-          notification = document.createElement("div");
-          notification.id = "adminNotification";
-          notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 1rem 1.5rem;
-        border-radius: 0.5rem;
-        color: white;
-        font-weight: 500;
-        z-index: 1000;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        transition: all 0.3s ease;
-      `;
-          document.body.appendChild(notification);
-        }
-
-        // Set style based on type
-        if (type === "error") {
-          notification.style.background = "var(--color-red-600)";
-        } else {
-          notification.style.background = "var(--color-green-600)";
-        }
-
+        const notification = document.getElementById("notification");
         notification.textContent = message;
-        notification.style.display = "block";
+        notification.className = `notification ${type}`;
 
-        // Hide after 3 seconds
         setTimeout(() => {
           notification.style.display = "none";
         }, 3000);
@@ -950,6 +1068,18 @@
           clearInterval(refreshInterval);
         }
       });
+
+      // Add logout functionality to avatar
+      document.querySelector(".avatar").addEventListener("click", function () {
+        if (confirm("Are you sure you want to logout?")) {
+          localStorage.removeItem("admin");
+          localStorage.removeItem("token");
+          window.location.href = "index.html";
+        }
+      });
+
+      // Initialize real-time indicator
+      showRealtimeIndicator(true);
     </script>
   </body>
 </html>
