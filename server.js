@@ -401,11 +401,21 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Internal server error" })
 })
 
+// Serve frontend for Render deployment
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
+
 // Start server
+// app.listen(PORT, () => {
+//   console.log(`PRANA Server running on http://localhost:${PORT}`)
+//   console.log("Database: prana.db")
+//   console.log("\nDefault Credentials:")
+//   console.log("Student - Scholar ID: 23144003, Password: password123")
+//   console.log("Admin - Email: admin@prana.com, Password: admin123")
+// })
+
 app.listen(PORT, () => {
-  console.log(`PRANA Server running on http://localhost:${PORT}`)
-  console.log("Database: prana.db")
-  console.log("\nDefault Credentials:")
-  console.log("Student - Scholar ID: 23144003, Password: password123")
-  console.log("Admin - Email: admin@prana.com, Password: admin123")
-})
+  console.log(`✅ Server running on Render at port ${PORT}`);
+});
+
