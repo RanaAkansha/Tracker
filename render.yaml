@@ -2,13 +2,11 @@ services:
   - type: web
     name: prana-system
     env: node
-    buildCommand: |
-      npm install
-      npm rebuild sqlite3 --build-from-source
+    plan: free
+    buildCommand: npm install && npm rebuild sqlite3 --build-from-source
     startCommand: node server.js
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: 10000
-    plan: free
